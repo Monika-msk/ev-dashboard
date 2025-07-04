@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ev-dashboard/static/css/main.e69754a9.css",
+    "main.js": "/ev-dashboard/static/js/main.8b82d082.js",
+    "index.html": "/ev-dashboard/index.html",
+    "main.e69754a9.css.map": "/ev-dashboard/static/css/main.e69754a9.css.map",
+    "main.8b82d082.js.map": "/ev-dashboard/static/js/main.8b82d082.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e69754a9.css",
+    "static/js/main.8b82d082.js"
+  ]
+}
