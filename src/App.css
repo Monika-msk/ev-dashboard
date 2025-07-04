@@ -1,0 +1,21 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.map-container {
+  height: 90vh;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  padding: 12px;
+  margin: 0;
+  background-color: #f8f8f8;
+  font-size: 20px;
+}
