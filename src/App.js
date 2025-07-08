@@ -505,7 +505,6 @@ const siteData = [  {
     contact: 'msedcl.nashikzone@mah.gov.in'
   },
   {
-    {
   id: 'K1',
   coordinates: [77.3860, 28.5653],
   corridor: 'Delhi – Agra',
