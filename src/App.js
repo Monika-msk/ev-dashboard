@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ'; 
 const corridorDefs = [ 
-    { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
+  { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
   { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
   { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
   { id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
@@ -14,23 +14,18 @@ const corridorDefs = [
   { id: 'H', name: 'Delhi–Chandigarh', src: [77.1025, 28.7041], dst: [76.7794, 30.7333], color: '#B2BEC3' },
   { id: 'I', name: 'Dhanbad–Kolkata', src: [86.4304, 23.7957], dst: [88.3639, 22.5726], color: '#4B6584' },
   { id: 'J', name: 'Pune–Nashik', src: [73.8567, 18.5204], dst: [73.7898, 19.9975], color: '#55E6C1' },
-{ id: 'K', name: 'Delhi – Agra', src: [77.1025, 28.7041], dst: [78.0081, 27.1767], color: '#E17055' },
-{ id: 'L', name: 'Paradeep – Barbil', src: [86.6100, 20.3167], dst: [85.3967, 22.1006], color: '#00CEC9' },
-{ id: 'M', name: 'Ahmedabad – Mundra', src: [72.5714, 23.0225], dst: [69.7190, 22.8392], color: '#6C5CE7' },
-{ id: 'N', name: 'Vijayawada – Hyderabad', src: [80.6480, 16.5062], dst: [78.4867, 17.3850], color: '#FAB1A0' },
-{ id: 'O', name: 'Mumbai – Nashik', src: [72.8777, 19.0760], dst: [73.7898, 19.9975], color: '#81ECEC' },
-{
-  
-  id: 'P',
+  { id: 'K', name: 'Delhi – Agra', src: [77.1025, 28.7041], dst: [78.0081, 27.1767], color: '#E17055' },
+  { id: 'L', name: 'Paradeep – Barbil', src: [86.6100, 20.3167], dst: [85.3967, 22.1006], color: '#00CEC9' },
+  { id: 'M', name: 'Ahmedabad – Mundra', src: [72.5714, 23.0225], dst: [69.7190, 22.8392], color: '#6C5CE7' },
+  { id: 'N', name: 'Vijayawada – Hyderabad', src: [80.6480, 16.5062], dst: [78.4867, 17.3850], color: '#FAB1A0' },
+  { id: 'O', name: 'Mumbai – Nashik', src: [72.8777, 19.0760], dst: [73.7898, 19.9975], color: '#81ECEC' },
+  {id: 'P',
   name: 'Dhanbad – Ranchi – Jamshedpur',
   src: [86.4304, 23.7957],          // Dhanbad
   via: [85.3430, 23.3441],          // Ranchi (NEW)
   dst: [86.2029, 22.8046],          // Jamshedpur
   color: '#FD79A8'
 },
-
-
-
 { id: 'Q', name: 'Pune – Kolhapur', src: [73.8567, 18.5204], dst: [74.2333, 16.7050], color: '#74B9FF' },
 { id: 'R', name: 'Surat – Vadodara', src: [72.8311, 21.1702], dst: [73.1812, 22.3072], color: '#D63031' },
 { id: 'S', name: 'Hubballi – Chitradurga', src: [75.1240, 15.3647], dst: [76.4039, 14.2222], color: '#00B894' },
@@ -473,7 +468,6 @@ const siteData = [  {
     renewables: 'NA',
     contact: 'msedcl.chakan@mah.gov.in'
   },
-
   {
     id: 'J3',
     coordinates: [73.9293, 19.5633],
@@ -546,9 +540,6 @@ const siteData = [  {
     "renewables": "NA",
     "contact": "uppcl.agra@up.gov.in"
   },
-  
-  
-  
   {
     id: 'L1',
     coordinates: [20.3800, 86.6640],
@@ -585,11 +576,43 @@ const siteData = [  {
     renewables: 'NA',
     contact: 'optcl.panposh@or.gov.in'
   },
-
-
-
-
   {
+    "id": "M1",
+    "coordinates": [23.1500, 72.5000],
+    "corridor": "Ahmedabad – Mundra",
+    "highway": "NH 947 / NH 27",
+    "distanceFromHighway": "2.1 km",
+    "siteSize": "2,300 m²",
+    "amenities": "Truck lay-by, fuel station, roadside eatery",
+    "substation": "GETCO Sabarmati (~1.8 km)",
+    "renewables": "NA",
+    "contact": "getco.sabarmati@gujarat.gov.in"
+  },
+  {
+    "id": "M2",
+    "coordinates": [22.6000, 72.2000],
+    "corridor": "Ahmedabad – Mundra",
+    "highway": "NH 947 / NH 27",
+    "distanceFromHighway": "2.4 km",
+    "siteSize": "2,100 m²",
+    "amenities": "Parking lot, mechanical workshop, tea stall",
+    "substation": "GETCO Morbi (~1.9 km)",
+    "renewables": "NA",
+    "contact": "getco.morbi@gujarat.gov.in"
+  },
+  {
+    "id": "M3",
+    "coordinates": [22.1000, 71.9000],
+    "corridor": "Ahmedabad – Mundra",
+    "highway": "NH 947 / NH 27",
+    "distanceFromHighway": "2.7 km",
+    "siteSize": "2,200 m²",
+    "amenities": "Logistics yard, truck parking, diner",
+    "substation": "GETCO Wankaner (~2.2 km)",
+    "renewables": "NA",
+    "contact": "getco.wankaner@gujarat.gov.in"
+  },
+{
   id: 'P1',
   coordinates: [86.4050, 23.7800],
   corridor: 'Dhanbad – Ranchi – Jamshedpur',
