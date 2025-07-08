@@ -541,43 +541,32 @@ const siteData = [  {
   contact: 'uppcl.agra@up.gov.in'
 },
 
-  {
-    id: 'L1',
-    coordinates: [20.3800, 86.6640],
-    corridor: 'Paradeep – Barbil',
-    highway: 'NH 53',
-    distanceFromHighway: '2.2 km',
-    siteSize: '2,200 m²',
-    amenities: 'Truck lay-by, fuel station, dhaba',
-    substation: 'OPTCL Jajpur Substation (~1.9 km)',
-    renewables: 'NA',
-    contact: 'optcl.jajpur@or.gov.in'
-  },
-  {
-    id: 'L2',
-    coordinates: [20.8415, 86.2770],
-    corridor: 'Paradeep – Barbil',
-    highway: 'NH 49',
-    distanceFromHighway: '2.5 km',
-    siteSize: '2,300 m²',
-    amenities: 'Parking, repair workshop, food stalls',
-    substation: 'OPTCL Keonjhar (~2.0 km)',
-    renewables: 'NA',
-    contact: 'optcl.keonjhar@or.gov.in'
-  },
-  {
-    id: 'L3',
-    coordinates: [21.3130, 85.8170],
-    corridor: 'Paradeep – Barbil',
-    highway: 'NH 20',
-    distanceFromHighway: '2.8 km',
-    siteSize: '2,100 m²',
-    amenities: 'Small logistics yard, dhaba, mechanical shop',
-    substation: 'OPTCL Panposh (~2.2 km)',
-    renewables: 'NA',
-    contact: 'optcl.panposh@or.gov.in'
-  },
-  {
+{
+  id: 'L1',
+  coordinates: [86.6100, 20.3167],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 20',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2100 m²',
+  amenities: 'Truck lay-by, fuel station, repair shop',
+  substation: 'OPTCL Paradeep (~1.7 km)',
+  renewables: 'NA',
+  contact: 'optcl.paradeep@odisha.gov.in'
+},
+{
+  id: 'L2',
+  coordinates: [85.3967, 22.1006],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 520',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2300 m²',
+  amenities: 'Industrial area halt, truck bay, tea stall',
+  substation: 'OPTCL Barbil (~2.1 km)',
+  renewables: 'NA',
+  contact: 'optcl.barbil@odisha.gov.in'
+},
+
+ {
   id: 'M1',
   coordinates: [72.5000, 23.1500],
   corridor: 'Ahmedabad – Mundra',
