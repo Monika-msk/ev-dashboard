@@ -510,7 +510,6 @@ const siteData = [  {
     renewables: 'Rooftop PV active',
     contact: 'msedcl.nashikzone@mah.gov.in'
   },
-  
   {
     "id": "K1",
     "coordinates": [77.3860, 28.5653],
@@ -547,6 +546,8 @@ const siteData = [  {
     "renewables": "NA",
     "contact": "uppcl.agra@up.gov.in"
   },
+  
+  
   
   {
     id: 'L1',
@@ -585,7 +586,7 @@ const siteData = [  {
     contact: 'optcl.panposh@or.gov.in'
   },
 
-```
+
 
 
   {
