@@ -473,6 +473,7 @@ const siteData = [  {
     renewables: 'NA',
     contact: 'msedcl.chakan@mah.gov.in'
   },
+
   {
     id: 'J3',
     coordinates: [73.9293, 19.5633],
@@ -509,8 +510,8 @@ const siteData = [  {
     renewables: 'Rooftop PV active',
     contact: 'msedcl.nashikzone@mah.gov.in'
   },
- 
-    {
+  
+  {
     "id": "K1",
     "coordinates": [77.3860, 28.5653],
     "corridor": "Delhi – Agra",
@@ -546,6 +547,47 @@ const siteData = [  {
     "renewables": "NA",
     "contact": "uppcl.agra@up.gov.in"
   },
+  
+  {
+    id: 'L1',
+    coordinates: [20.3800, 86.6640],
+    corridor: 'Paradeep – Barbil',
+    highway: 'NH 53',
+    distanceFromHighway: '2.2 km',
+    siteSize: '2,200 m²',
+    amenities: 'Truck lay-by, fuel station, dhaba',
+    substation: 'OPTCL Jajpur Substation (~1.9 km)',
+    renewables: 'NA',
+    contact: 'optcl.jajpur@or.gov.in'
+  },
+  {
+    id: 'L2',
+    coordinates: [20.8415, 86.2770],
+    corridor: 'Paradeep – Barbil',
+    highway: 'NH 49',
+    distanceFromHighway: '2.5 km',
+    siteSize: '2,300 m²',
+    amenities: 'Parking, repair workshop, food stalls',
+    substation: 'OPTCL Keonjhar (~2.0 km)',
+    renewables: 'NA',
+    contact: 'optcl.keonjhar@or.gov.in'
+  },
+  {
+    id: 'L3',
+    coordinates: [21.3130, 85.8170],
+    corridor: 'Paradeep – Barbil',
+    highway: 'NH 20',
+    distanceFromHighway: '2.8 km',
+    siteSize: '2,100 m²',
+    amenities: 'Small logistics yard, dhaba, mechanical shop',
+    substation: 'OPTCL Panposh (~2.2 km)',
+    renewables: 'NA',
+    contact: 'optcl.panposh@or.gov.in'
+  },
+
+```
+
+
   {
   id: 'P1',
   coordinates: [86.4050, 23.7800],
@@ -581,7 +623,7 @@ const siteData = [  {
   substation: 'Adityapur-1 Substation (132/33 kV, ~1 km)',
   renewables: 'Tata rooftop solar & industrial PV cluster',
   contact: 'aiada1972@gmail.com | +91-657-2371693'
-},
+}
 
 
 ];
