@@ -601,22 +601,26 @@ export default function EVMapDashboard() {
   }, []);
 
   useEffect(() => {
-    corridorDefs.forEach(c => {
-      const coords = c.mid
-  ? `${c.src[0]},${c.src[1]};${c.mid[0]},${c.mid[1]};${c.dst[0]},${c.dst[1]}`
-  : `${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}`;
-  const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coords}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+  const fetchAllRoutes = async () => {
+    const fetchedRoutes = {};
+    for (const c of corridorDefs) {
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.routes?.[0]?.geometry) {
+          fetchedRoutes[c.id] = json.routes[0].geometry;
+        }
+      } catch (err) {
+        console.error(`Failed to fetch route ${c.id}:`, err);
+      }
+    }
+    setRoutes(fetchedRoutes);  // ✅ Set only after all routes are fetched
+  };
 
+  fetchAllRoutes();
+}, []);
 
-      fetch(url)
-        .then(res => res.json())
-        .then(json => {
-          if (json.routes?.[0]?.geometry) {
-            setRoutes(prev => ({ ...prev, [c.id]: json.routes[0].geometry }));
-          }
-        });
-    });
-  }, []);
 
   useEffect(() => {
     const map = mapRef.current;
