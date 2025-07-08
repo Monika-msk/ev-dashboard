@@ -2,10 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ';
-
-const corridorDefs = [
-  { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
+mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ'; 
+const corridorDefs = [ 
+    { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
   { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
   { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
   { id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
@@ -15,7 +14,6 @@ const corridorDefs = [
   { id: 'H', name: 'Delhi–Chandigarh', src: [77.1025, 28.7041], dst: [76.7794, 30.7333], color: '#B2BEC3' },
   { id: 'I', name: 'Dhanbad–Kolkata', src: [86.4304, 23.7957], dst: [88.3639, 22.5726], color: '#4B6584' },
   { id: 'J', name: 'Pune–Nashik', src: [73.8567, 18.5204], dst: [73.7898, 19.9975], color: '#55E6C1' },
-  // Continuing from corridorDefs[10] (which was J)
 { id: 'K', name: 'Delhi – Agra', src: [77.1025, 28.7041], dst: [78.0081, 27.1767], color: '#E17055' },
 { id: 'L', name: 'Paradeep – Barbil', src: [86.6100, 20.3167], dst: [85.3967, 22.1006], color: '#00CEC9' },
 { id: 'M', name: 'Ahmedabad – Mundra', src: [72.5714, 23.0225], dst: [69.7190, 22.8392], color: '#6C5CE7' },
@@ -30,11 +28,9 @@ const corridorDefs = [
 { id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], dst: [74.8723, 31.6340], color: '#FDCB6E' },
 { id: 'W', name: 'Chennai – Ongole', src: [80.2707, 13.0827], dst: [80.0483, 15.5036], color: '#A29BFE' },
 { id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }
+ ];
 
-];
-
-
-const siteData = [ {
+const siteData = [  {
     id: 'A1',
     coordinates: [79.9053, 12.5144],
     corridor: 'Chennai – Villupuram',
@@ -538,14 +534,45 @@ const siteData = [ {
     "substation": "UPPCL Agra South (~2.4 km)",
     "renewables": "NA",
     "contact": "uppcl.agra@up.gov.in"
-  }
+  },
+  {
+  id: 'P1',
+  coordinates: [86.4050, 23.7800],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 18',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2000 m²',
+  amenities: 'Petrol pump (~1 km), truck parking (~800 m), dhaba (~500 m)',
+  substation: '132 kV JBVNL feeder; East Basuria Colliery Substation (~1.1 km)',
+  renewables: 'Upcoming BCCL Dhanbad PV Park, railway rooftop solar nearby',
+  contact: 'bccl.cmp@gov.in | +91-326-2230195'
+},
+{
+  id: 'P2',
+  coordinates: [85.3000, 23.3200],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 20',
+  distanceFromHighway: '2.0 km',
+  siteSize: '1800 m²',
+  amenities: 'Petrol pump (~700 m), dhabas (~1 km), hotel (~1.5 km)',
+  substation: '20 MVA Tatisilwai Substation (~1.2 km)',
+  renewables: 'Rooftop/canal-top solar zone on JREDA cluster',
+  contact: 'jiada.rnc@gmail.com | +91-651-2460125'
+},
+{
+  id: 'P3',
+  coordinates: [86.1185, 22.8020],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 33',
+  distanceFromHighway: '2.8 km',
+  siteSize: '2200 m²',
+  amenities: 'Petrol pump (~600 m), dhaba (~1 km), workshops (~1 km), truck parking (~900 m)',
+  substation: 'Adityapur-1 Substation (132/33 kV, ~1 km)',
+  renewables: 'Tata rooftop solar & industrial PV cluster',
+  contact: 'aiada1972@gmail.com | +91-657-2371693'
+},
 
 
-
-  
-]
-
-  
 ];
 
 export default function EVMapDashboard() {
@@ -555,10 +582,7 @@ export default function EVMapDashboard() {
   const [markerRefs, setMarkerRefs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [routes, setRoutes] = useState({});
- 
 
-
-  
   useEffect(() => {
     mapRef.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -568,7 +592,6 @@ export default function EVMapDashboard() {
     });
   }, []);
 
- 
   useEffect(() => {
     corridorDefs.forEach(c => {
       const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
@@ -582,14 +605,12 @@ export default function EVMapDashboard() {
     });
   }, []);
 
-  
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !Object.keys(routes).length) return;
 
     corridorDefs.forEach(c => {
       const layerId = `route-${c.id}`;
-
       if (map.getSource(layerId)) return;
 
       map.addSource(layerId, {
@@ -614,126 +635,113 @@ export default function EVMapDashboard() {
     });
   }, [routes]);
 
-  
-  // ✅ Inside EVMapDashboard component, replace your useEffect for markers with this:
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
 
-useEffect(() => {
-  const map = mapRef.current;
-  if (!map) return;
+    markerRefs.forEach(m => m.remove());
+    const newMarkers = [];
 
-  markerRefs.forEach(m => m.remove());
-  const newMarkers = [];
+    let filtered = [];
 
-  let filtered = [];
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = siteData.filter(site =>
+        (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
+        Object.values(site).some(val =>
+          typeof val === 'string' && val.toLowerCase().includes(query)
+        )
+      );
+    } else if (activeCorridor) {
+      filtered = siteData.filter(site => site.id.startsWith(activeCorridor));
+    } else {
+      filtered = [];
+    }
 
-  if (searchQuery.trim()) {
-    const query = searchQuery.toLowerCase();
-    filtered = siteData.filter(site =>
-      (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
-      Object.values(site).some(val =>
-        typeof val === 'string' && val.toLowerCase().includes(query)
-      )
-    );
-  } else if (activeCorridor) {
-    filtered = siteData.filter(site => site.id.startsWith(activeCorridor));
-  } else {
-    filtered = [];
-  }
+    const bounds = new mapboxgl.LngLatBounds();
 
-  
+    filtered.forEach(site => {
+      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<strong>${site.id} – ${site.corridor}</strong><br/>
+         <b>Highway:</b> ${site.highway}<br/>
+         <b>Distance from Highway:</b> ${site.distanceFromHighway}<br/>
+         <b>Coordinates:</b> ${site.coordinates[1].toFixed(4)}, ${site.coordinates[0].toFixed(4)}<br/>
+         <b>Site Size:</b> ${site.siteSize}<br/>
+         <b>Amenities:</b> ${site.amenities}<br/>
+         <b>Substation:</b> ${site.substation}<br/>
+         <b>Renewables:</b> ${site.renewables}<br/>
+         <b>Contact:</b> ${site.contact}`
+      );
 
-  const bounds = new mapboxgl.LngLatBounds();
-  
-  filtered.forEach(site => {
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-  `<strong>${site.id} – ${site.corridor}</strong><br/>
-   <b>Highway:</b> ${site.highway}<br/>
-   <b>Distance from Highway:</b> ${site.distanceFromHighway}<br/>
-   <b>Coordinates:</b> ${site.coordinates[1].toFixed(4)}, ${site.coordinates[0].toFixed(4)}<br/>
-   <b>Site Size:</b> ${site.siteSize}<br/>
-   <b>Amenities:</b> ${site.amenities}<br/>
-   <b>Substation:</b> ${site.substation}<br/>
-   <b>Renewables:</b> ${site.renewables}<br/>
-   <b>Contact:</b> ${site.contact}`
-);
+      const marker = new mapboxgl.Marker({ color: '#D91F1F' })
+        .setLngLat(site.coordinates)
+        .setPopup(popup)
+        .addTo(map);
 
+      newMarkers.push(marker);
+      bounds.extend(site.coordinates);
+    });
 
-    const marker = new mapboxgl.Marker({ color: '#D91F1F' })
-      .setLngLat(site.coordinates)
-      .setPopup(popup)
-      .addTo(map);
+    setMarkerRefs(newMarkers);
 
-    newMarkers.push(marker);
-    bounds.extend(site.coordinates);
-  });
+    if (!bounds.isEmpty()) {
+      map.fitBounds(bounds, { padding: 100 });
+    }
+  }, [activeCorridor, searchQuery]);
 
-  setMarkerRefs(newMarkers);
-
-  if (!bounds.isEmpty()) {
-    map.fitBounds(bounds, { padding: 100 });
-  }
-}, [activeCorridor, searchQuery,]);
-return (
-  <div style={{ display: 'flex', height: '100vh' }}>
-    {/* Sidebar */}
-    <div style={{
-      width: '260px',
-      background: '#f4f4f4',
-      borderRight: '1px solid #ccc',
-      padding: '12px',
-      overflowY: 'auto'
-    }}>
-      <h3 style={{ textAlign: 'center' }}>EV Corridors</h3>
-
-      {/* 🔍 Filter Section */}
-      
-      {/* 🚗 Corridor Buttons */}
-      {corridorDefs.map(c => (
-        <button
-          key={c.id}
-          onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
-          style={{
-            display: 'block',
-            width: '100%',
-            marginBottom: '8px',
-            padding: '8px 12px',
-            background: activeCorridor === c.id ? c.color : '#fff',
-            color: activeCorridor === c.id ? '#fff' : '#333',
-            border: `1px solid ${c.color}`,
-            borderRadius: '4px',
-            textAlign: 'left',
-            cursor: 'pointer',
-            fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
-          }}
-        >
-          {c.id} - {c.name}
-        </button>
-      ))}
-    </div>
-
-    {/* Right: Map and Search */}
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-      {/* 🔎 Search Bar */}
-      <div style={{ padding: '10px', background: '#fff', borderBottom: '1px solid #ccc' }}>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
-          style={{
-            width: '400px',
-            padding: '8px',
-            fontSize: '14px',
-            borderRadius: '4px',
-            border: '1px solid #ccc'
-          }}
-        />
+  return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      {/* Sidebar */}
+      <div style={{
+        width: '260px',
+        background: '#f4f4f4',
+        borderRight: '1px solid #ccc',
+        padding: '12px',
+        overflowY: 'auto'
+      }}>
+        <h3 style={{ textAlign: 'center' }}>EV Corridors</h3>
+        {corridorDefs.map(c => (
+          <button
+            key={c.id}
+            onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
+            style={{
+              display: 'block',
+              width: '100%',
+              marginBottom: '8px',
+              padding: '8px 12px',
+              background: activeCorridor === c.id ? c.color : '#fff',
+              color: activeCorridor === c.id ? '#fff' : '#333',
+              border: `1px solid ${c.color}`,
+              borderRadius: '4px',
+              textAlign: 'left',
+              cursor: 'pointer',
+              fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
+            }}
+          >
+            {c.id} - {c.name}
+          </button>
+        ))}
       </div>
 
-      {/* 🗺️ Map container */}
-      <div ref={mapContainer} style={{ flex: 1 }} />
+      {/* Right section: search + map */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '10px', background: '#fff', borderBottom: '1px solid #ccc' }}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
+            style={{
+              width: '400px',
+              padding: '8px',
+              fontSize: '14px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+          />
+        </div>
+        <div ref={mapContainer} style={{ flex: 1 }} />
+      </div>
     </div>
-  </div>
-);
+  );
 }
-
