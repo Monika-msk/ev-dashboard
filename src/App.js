@@ -601,7 +601,7 @@ const siteData = [  {
   substation: 'GETCO Wankaner (~2.2 km)',
   renewables: 'NA',
   contact: 'getco.wankaner@gujarat.gov.in'
-}
+},
 
 
 {
