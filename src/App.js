@@ -505,41 +505,43 @@ const siteData = [  {
     contact: 'msedcl.nashikzone@mah.gov.in'
   },
   {
-    "id": "K1",
-    "coordinates": [77.3860, 28.5653],
-    "corridor": "Delhi – Agra",
-    "highway": "Yamuna Expressway",
-    "distanceFromHighway": "2.3 km",
-    "siteSize": "2200 m²",
-    "amenities": "Large truck lay-by, fuel station, dhaba cluster",
-    "substation": "UPPCL Jewar Substation (~2.1 km)",
-    "renewables": "NA",
-    "contact": "uppcl.jewar@up.gov.in"
-  },
-  {
-    "id": "K2",
-    "coordinates": [77.6324, 27.7742],
-    "corridor": "Delhi – Agra",
-    "highway": "Yamuna Expressway",
-    "distanceFromHighway": "2.5 km",
-    "siteSize": "2300 m²",
-    "amenities": "Highway halt, café, EV pilot station, truck parking",
-    "substation": "UPPCL Mathura Grid (~2.0 km)",
-    "renewables": "NA",
-    "contact": "uppcl.mathura@up.gov.in"
-  },
-  {
-    "id": "K3",
-    "coordinates": [78.0822, 27.2070],
-    "corridor": "Delhi – Agra",
-    "highway": "Yamuna Expressway",
-    "distanceFromHighway": "2.7 km",
-    "siteSize": "2400 m²",
-    "amenities": "Rest area, fuel station, vehicle repair zone",
-    "substation": "UPPCL Agra South (~2.4 km)",
-    "renewables": "NA",
-    "contact": "uppcl.agra@up.gov.in"
-  },
+    {
+  id: 'K1',
+  coordinates: [77.3860, 28.5653],
+  corridor: 'Delhi – Agra',
+  highway: 'Yamuna Expressway',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2200 m²',
+  amenities: 'Large truck lay-by, fuel station, dhaba cluster',
+  substation: 'UPPCL Jewar Substation (~2.1 km)',
+  renewables: 'NA',
+  contact: 'uppcl.jewar@up.gov.in'
+},
+{
+  id: 'K2',
+  coordinates: [77.6324, 27.7742],
+  corridor: 'Delhi – Agra',
+  highway: 'Yamuna Expressway',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Highway halt, café, EV pilot station, truck parking',
+  substation: 'UPPCL Mathura Grid (~2.0 km)',
+  renewables: 'NA',
+  contact: 'uppcl.mathura@up.gov.in'
+},
+{
+  id: 'K3',
+  coordinates: [78.0822, 27.2070],
+  corridor: 'Delhi – Agra',
+  highway: 'Yamuna Expressway',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2400 m²',
+  amenities: 'Rest area, fuel station, vehicle repair zone',
+  substation: 'UPPCL Agra South (~2.4 km)',
+  renewables: 'NA',
+  contact: 'uppcl.agra@up.gov.in'
+},
+
   {
     id: 'L1',
     coordinates: [20.3800, 86.6640],
@@ -577,41 +579,42 @@ const siteData = [  {
     contact: 'optcl.panposh@or.gov.in'
   },
   {
-    "id": "M1",
-    "coordinates": [23.1500, 72.5000],
-    "corridor": "Ahmedabad – Mundra",
-    "highway": "NH 947 / NH 27",
-    "distanceFromHighway": "2.1 km",
-    "siteSize": "2,300 m²",
-    "amenities": "Truck lay-by, fuel station, roadside eatery",
-    "substation": "GETCO Sabarmati (~1.8 km)",
-    "renewables": "NA",
-    "contact": "getco.sabarmati@gujarat.gov.in"
-  },
-  {
-    "id": "M2",
-    "coordinates": [22.6000, 72.2000],
-    "corridor": "Ahmedabad – Mundra",
-    "highway": "NH 947 / NH 27",
-    "distanceFromHighway": "2.4 km",
-    "siteSize": "2,100 m²",
-    "amenities": "Parking lot, mechanical workshop, tea stall",
-    "substation": "GETCO Morbi (~1.9 km)",
-    "renewables": "NA",
-    "contact": "getco.morbi@gujarat.gov.in"
-  },
-  {
-    "id": "M3",
-    "coordinates": [22.1000, 71.9000],
-    "corridor": "Ahmedabad – Mundra",
-    "highway": "NH 947 / NH 27",
-    "distanceFromHighway": "2.7 km",
-    "siteSize": "2,200 m²",
-    "amenities": "Logistics yard, truck parking, diner",
-    "substation": "GETCO Wankaner (~2.2 km)",
-    "renewables": "NA",
-    "contact": "getco.wankaner@gujarat.gov.in"
-  },
+  id: 'M1',
+  coordinates: [72.5000, 23.1500],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.1 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck lay-by, fuel station, roadside eatery',
+  substation: 'GETCO Sabarmati (~1.8 km)',
+  renewables: 'NA',
+  contact: 'getco.sabarmati@gujarat.gov.in'
+},
+{
+  id: 'M2',
+  coordinates: [72.2000, 22.6000],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2100 m²',
+  amenities: 'Parking lot, mechanical workshop, tea stall',
+  substation: 'GETCO Morbi (~1.9 km)',
+  renewables: 'NA',
+  contact: 'getco.morbi@gujarat.gov.in'
+},
+{
+  id: 'M3',
+  coordinates: [71.9000, 22.1000],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2200 m²',
+  amenities: 'Logistics yard, truck parking, diner',
+  substation: 'GETCO Wankaner (~2.2 km)',
+  renewables: 'NA',
+  contact: 'getco.wankaner@gujarat.gov.in'
+},
+
 {
   id: 'P1',
   coordinates: [86.4050, 23.7800],
