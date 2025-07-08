@@ -543,65 +543,66 @@ const siteData = [  {
 
 {
   id: 'L1',
-  coordinates: [86.6100, 20.3167],
+  coordinates: [86.6100, 20.3167], // Longitude, Latitude
   corridor: 'Paradeep – Barbil',
   highway: 'NH 20',
-  distanceFromHighway: '2.4 km',
+  distanceFromHighway: '2.3 km',
   siteSize: '2100 m²',
-  amenities: 'Truck lay-by, fuel station, repair shop',
+  amenities: 'Petrol pump, dhaba, truck repair stop',
   substation: 'OPTCL Paradeep (~1.7 km)',
   renewables: 'NA',
   contact: 'optcl.paradeep@odisha.gov.in'
 },
 {
   id: 'L2',
-  coordinates: [85.3967, 22.1006],
+  coordinates: [85.3967, 22.1006], // Longitude, Latitude
   corridor: 'Paradeep – Barbil',
   highway: 'NH 520',
-  distanceFromHighway: '2.3 km',
+  distanceFromHighway: '2.6 km',
   siteSize: '2300 m²',
-  amenities: 'Industrial area halt, truck bay, tea stall',
-  substation: 'OPTCL Barbil (~2.1 km)',
+  amenities: 'Transport yard, food joint, rest stop',
+  substation: 'OPTCL Barbil (~2.2 km)',
   renewables: 'NA',
   contact: 'optcl.barbil@odisha.gov.in'
 },
 
- {
+{
   id: 'M1',
-  coordinates: [72.5000, 23.1500],
+  coordinates: [72.5000, 23.1500],  // longitude, latitude (corrected)
   corridor: 'Ahmedabad – Mundra',
   highway: 'NH 947 / NH 27',
   distanceFromHighway: '2.1 km',
   siteSize: '2300 m²',
   amenities: 'Truck lay-by, fuel station, roadside eatery',
-  substation: 'GETCO Sabarmati (~1.8 km)',
+  substation: 'GETCO Sabarmati (~1.8 km)',
   renewables: 'NA',
   contact: 'getco.sabarmati@gujarat.gov.in'
 },
 {
   id: 'M2',
-  coordinates: [72.2000, 22.6000],
+  coordinates: [72.2000, 22.6000],  // longitude, latitude (corrected)
   corridor: 'Ahmedabad – Mundra',
   highway: 'NH 947 / NH 27',
   distanceFromHighway: '2.4 km',
   siteSize: '2100 m²',
   amenities: 'Parking lot, mechanical workshop, tea stall',
-  substation: 'GETCO Morbi (~1.9 km)',
+  substation: 'GETCO Morbi (~1.9 km)',
   renewables: 'NA',
   contact: 'getco.morbi@gujarat.gov.in'
 },
 {
   id: 'M3',
-  coordinates: [71.9000, 22.1000],
+  coordinates: [71.9000, 22.1000],  // longitude, latitude (corrected)
   corridor: 'Ahmedabad – Mundra',
   highway: 'NH 947 / NH 27',
   distanceFromHighway: '2.7 km',
   siteSize: '2200 m²',
   amenities: 'Logistics yard, truck parking, diner',
-  substation: 'GETCO Wankaner (~2.2 km)',
+  substation: 'GETCO Wankaner (~2.2 km)',
   renewables: 'NA',
   contact: 'getco.wankaner@gujarat.gov.in'
-},
+}
+
 
 {
   id: 'P1',
