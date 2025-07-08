@@ -20,14 +20,17 @@ const corridorDefs = [
 { id: 'N', name: 'Vijayawada – Hyderabad', src: [80.6480, 16.5062], dst: [78.4867, 17.3850], color: '#FAB1A0' },
 { id: 'O', name: 'Mumbai – Nashik', src: [72.8777, 19.0760], dst: [73.7898, 19.9975], color: '#81ECEC' },
 {
+  
   id: 'P',
   name: 'Dhanbad – Ranchi – Jamshedpur',
-  src: [86.4304, 23.7957],             // Dhanbad
-  mid: [85.3333, 23.3441],             // Ranchi (waypoint)
-  dst: [86.2029, 22.8046],             // Jamshedpur
+  src: [86.4304, 23.7957],          // Dhanbad
+  via: [85.3430, 23.3441],          // Ranchi (NEW)
+  dst: [86.2029, 22.8046],          // Jamshedpur
   color: '#FD79A8'
-
 },
+
+
+
 { id: 'Q', name: 'Pune – Kolhapur', src: [73.8567, 18.5204], dst: [74.2333, 16.7050], color: '#74B9FF' },
 { id: 'R', name: 'Surat – Vadodara', src: [72.8311, 21.1702], dst: [73.1812, 22.3072], color: '#D63031' },
 { id: 'S', name: 'Hubballi – Chitradurga', src: [75.1240, 15.3647], dst: [76.4039, 14.2222], color: '#00B894' },
@@ -603,8 +606,16 @@ export default function EVMapDashboard() {
   useEffect(() => {
   const fetchAllRoutes = async () => {
     const fetchedRoutes = {};
+
     for (const c of corridorDefs) {
-      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+      // ✅ Build coordinate string with optional via point
+      let coordString = `${c.src[0]},${c.src[1]}`;
+      if (c.via) {
+        coordString += `;${c.via[0]},${c.via[1]}`;
+      }
+      coordString += `;${c.dst[0]},${c.dst[1]}`;
+
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
       try {
         const res = await fetch(url);
         const json = await res.json();
@@ -615,11 +626,13 @@ export default function EVMapDashboard() {
         console.error(`Failed to fetch route ${c.id}:`, err);
       }
     }
-    setRoutes(fetchedRoutes);  // ✅ Set only after all routes are fetched
+
+    setRoutes(fetchedRoutes);
   };
 
   fetchAllRoutes();
 }, []);
+
 
 
   useEffect(() => {
