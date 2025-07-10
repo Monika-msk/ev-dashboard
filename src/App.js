@@ -504,7 +504,7 @@ const siteData = [  {
     renewables: 'Rooftop PV active',
     contact: 'msedcl.nashikzone@mah.gov.in'
   },
-  {
+ {
   id: 'K1',
   coordinates: [77.3860, 28.5653],
   corridor: 'Delhi – Agra',
@@ -540,47 +540,357 @@ const siteData = [  {
   renewables: 'NA',
   contact: 'uppcl.agra@up.gov.in'
 },
-
-
-
-
+{
+  id: 'L1',
+  coordinates: [20.2893, 86.6106],
+  corridor: 'Paradeep – Barbil',
+  highway: 'SH 12 / NH 53',
+  distanceFromHighway: '2.2 km',
+  siteSize: '2000 m²',
+  amenities: 'Port-side truck yard, pump, food stalls',
+  substation: 'OPTCL Paradeep (~1.6 km)',
+  renewables: 'NA',
+  contact: 'optcl.paradeep@odisha.gov.in'
+},
+{
+  id: 'L2',
+  coordinates: [21.9817, 85.3927],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 215',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2100 m²',
+  amenities: 'Truck rest zone, dhaba, fuel, repair',
+  substation: 'OPTCL Barbil (~2.0 km)',
+  renewables: 'NA',
+  contact: 'optcl.barbil@odisha.gov.in'
+},
+{
+  id: 'M1',
+  coordinates: [23.1500, 72.5000],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.1 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck lay-by, fuel station, roadside eatery',
+  substation: 'GETCO Sabarmati (~1.8 km)',
+  renewables: 'NA',
+  contact: 'getco.sabarmati@gujarat.gov.in'
+},
+{
+  id: 'M2',
+  coordinates: [22.6000, 72.2000],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2100 m²',
+  amenities: 'Parking lot, mechanical workshop, tea stall',
+  substation: 'GETCO Morbi (~1.9 km)',
+  renewables: 'NA',
+  contact: 'getco.morbi@gujarat.gov.in'
+},
+{
+  id: 'M3',
+  coordinates: [22.1000, 71.9000],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 947 / NH 27',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2200 m²',
+  amenities: 'Logistics yard, truck parking, diner',
+  substation: 'GETCO Wankaner (~2.2 km)',
+  renewables: 'NA',
+  contact: 'getco.wankaner@gujarat.gov.in'
+},
+{
+  id: 'N1',
+  coordinates: [16.5432, 80.6414],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.2 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel station, café, halt zone',
+  substation: 'APSPDCL Vijayawada (~1.7 km)',
+  renewables: 'NA',
+  contact: 'apsdcl.vijayawada@ap.gov.in'
+},
+{
+  id: 'N2',
+  coordinates: [17.1964, 79.6422],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck zone, dhaba, rest stop',
+  substation: 'APSPDCL Suryapet (~1.8 km)',
+  renewables: 'NA',
+  contact: 'apsdcl.suryapet@ap.gov.in'
+},
+{
+  id: 'N3',
+  coordinates: [17.3850, 78.4867],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2400 m²',
+  amenities: 'City entry rest hub, garage, food',
+  substation: 'TSSPDCL Hyderabad South (~2.2 km)',
+  renewables: 'NA',
+  contact: 'tsspdcl.hyderabad@telangana.gov.in'
+},
+{
+  id: 'O1',
+  coordinates: [19.1500, 72.8500],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2100 m²',
+  amenities: 'Rest zone, city fuel, dhaba',
+  substation: 'MSEDCL Bhiwandi (~1.5 km)',
+  renewables: 'NA',
+  contact: 'msedcl.bhiwandi@mah.gov.in'
+},
+{
+  id: 'O2',
+  coordinates: [19.8200, 73.1300],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck bay, workshop, hotel',
+  substation: 'MSEDCL Igatpuri (~1.7 km)',
+  renewables: 'NA',
+  contact: 'msedcl.igatpuri@mah.gov.in'
+},
+{
+  id: 'O3',
+  coordinates: [19.9975, 73.7898],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2400 m²',
+  amenities: 'Nashik truck rest zone, café',
+  substation: 'MSEDCL Nashik East (~2.0 km)',
+  renewables: 'NA',
+  contact: 'msedcl.nashikeast@mah.gov.in'
+},
 {
   id: 'P1',
-  coordinates: [86.4050, 23.7800],
+  coordinates: [23.7800, 86.4050],
   corridor: 'Dhanbad – Ranchi – Jamshedpur',
-  highway: 'NH 18',
+  highway: 'NH 18 / NH 20',
   distanceFromHighway: '2.3 km',
   siteSize: '2000 m²',
   amenities: 'Petrol pump (~1 km), truck parking (~800 m), dhaba (~500 m)',
   substation: '132 kV JBVNL feeder; East Basuria Colliery Substation (~1.1 km)',
-  renewables: 'Upcoming BCCL Dhanbad PV Park, railway rooftop solar nearby',
-  contact: 'bccl.cmp@gov.in | +91-326-2230195'
+  renewables: 'BCCL Dhanbad PV Park (28 MW), railway rooftop solar',
+  contact: 'bccl.cmp@gov.in, +91-326-2230195'
 },
 {
   id: 'P2',
-  coordinates: [85.3000, 23.3200],
+  coordinates: [23.3200, 85.3000],
   corridor: 'Dhanbad – Ranchi – Jamshedpur',
   highway: 'NH 20',
   distanceFromHighway: '2.0 km',
   siteSize: '1800 m²',
   amenities: 'Petrol pump (~700 m), dhabas (~1 km), hotel (~1.5 km)',
   substation: '20 MVA Tatisilwai Substation (~1.2 km)',
-  renewables: 'Rooftop/canal-top solar zone on JREDA cluster',
-  contact: 'jiada.rnc@gmail.com | +91-651-2460125'
+  renewables: 'Rooftop/canal-top solar zone – JREDA cluster',
+  contact: 'jiada.rnc@gmail.com, +91-651-2460125'
 },
 {
   id: 'P3',
-  coordinates: [86.1185, 22.8020],
+  coordinates: [22.8020, 86.1185],
   corridor: 'Dhanbad – Ranchi – Jamshedpur',
   highway: 'NH 33',
   distanceFromHighway: '2.8 km',
   siteSize: '2200 m²',
   amenities: 'Petrol pump (~600 m), dhaba (~1 km), workshops (~1 km), truck parking (~900 m)',
   substation: 'Adityapur-1 Substation (132/33 kV, ~1 km)',
-  renewables: 'Tata rooftop solar & industrial PV cluster',
-  contact: 'aiada1972@gmail.com | +91-657-2371693'
+  renewables: 'Tata rooftop solar, industrial PV cluster',
+  contact: 'aiada1972@gmail.com, +91-657-2371693'
+},
+{
+  id: 'Q1',
+  coordinates: [18.5300, 73.8800],
+  corridor: 'Pune – Kolhapur',
+  highway: 'NH 48',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel station, truck bay, eatery',
+  substation: 'MSEDCL Pune South (~1.7 km)',
+  renewables: 'NA',
+  contact: 'msedcl.punesouth@mah.gov.in'
+},
+{
+  id: 'Q2',
+  coordinates: [17.7500, 74.4500],
+  corridor: 'Pune – Kolhapur',
+  highway: 'NH 48',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck lounge, repair bay, hotel',
+  substation: 'MSEDCL Satara (~2.0 km)',
+  renewables: 'NA',
+  contact: 'msedcl.satara@mah.gov.in'
+},
+{
+  id: 'Q3',
+  coordinates: [16.7050, 74.2333],
+  corridor: 'Pune – Kolhapur',
+  highway: 'NH 48',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2400 m²',
+  amenities: 'City-edge EV halt zone, dhaba cluster',
+  substation: 'MSEDCL Kolhapur (~1.8 km)',
+  renewables: 'NA',
+  contact: 'msedcl.kolhapur@mah.gov.in'
+},
+{
+  id: 'R1',
+  coordinates: [21.2200, 72.8300],
+  corridor: 'Surat – Vadodara',
+  highway: 'NH 48',
+  distanceFromHighway: '2.2 km',
+  siteSize: '2100 m²',
+  amenities: 'Fuel station, food court, tire shop',
+  substation: 'DGVCL Surat West (~1.6 km)',
+  renewables: 'NA',
+  contact: 'dgvcl.surat@gujarat.gov.in'
+},
+{
+  id: 'R2',
+  coordinates: [21.8000, 73.0000],
+  corridor: 'Surat – Vadodara',
+  highway: 'NH 48',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2300 m²',
+  amenities: 'Rest station, food plaza, EV trial setup',
+  substation: 'MGVCL Bharuch (~2.1 km)',
+  renewables: 'NA',
+  contact: 'mgvcl.bharuch@gujarat.gov.in'
+},
+{
+  id: 'R3',
+  coordinates: [22.3072, 73.1812],
+  corridor: 'Surat – Vadodara',
+  highway: 'NH 48',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2400 m²',
+  amenities: 'Urban fuel stop, truck bay, dhaba',
+  substation: 'MGVCL Vadodara East (~1.9 km)',
+  renewables: 'NA',
+  contact: 'mgvcl.vadodara@gujarat.gov.in'
+},
+{
+  id: 'S1',
+  coordinates: [15.3647, 75.1240],
+  corridor: 'Hubballi – Chitradurga',
+  highway: 'NH 48',
+  distanceFromHighway: '2.2 km',
+  siteSize: '2100 m²',
+  amenities: 'Logistics zone, fuel, rest bay',
+  substation: 'HESCOM Hubballi (~1.8 km)',
+  renewables: 'NA',
+  contact: 'hescom.hubballi@karnataka.gov.in'
+},
+{
+  id: 'S2',
+  coordinates: [14.8000, 75.6500],
+  corridor: 'Hubballi – Chitradurga',
+  highway: 'NH 48',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck eatery cluster, tire bay',
+  substation: 'HESCOM Davangere (~2.1 km)',
+  renewables: 'NA',
+  contact: 'hescom.davangere@karnataka.gov.in'
+},
+{
+  id: 'S3',
+  coordinates: [14.2222, 76.4039],
+  corridor: 'Hubballi – Chitradurga',
+  highway: 'NH 48',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2300 m²',
+  amenities: 'EV stop, highway café, parking',
+  substation: 'GESCOM Chitradurga (~1.7 km)',
+  renewables: 'NA',
+  contact: 'gescom.chitradurga@karnataka.gov.in'
+},
+{
+  id: 'T1',
+  coordinates: [18.9467, 73.0280],
+  corridor: 'JNPT/Navi Mumbai – Pune',
+  highway: 'NH 48',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2100 m²',
+  amenities: 'Port entry truck halt, fuel, restrooms',
+  substation: 'MSEDCL Navi Mumbai Port (~1.5 km)',
+  renewables: 'NA',
+  contact: 'msedcl.jnpt@mah.gov.in'
+},
+{
+  id: 'T2',
+  coordinates: [18.7000, 73.4000],
+  corridor: 'JNPT/Navi Mumbai – Pune',
+  highway: 'NH 48',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2200 m²',
+  amenities: 'Highway EV stop, dhaba, repair',
+  substation: 'MSEDCL Lonavala (~1.9 km)',
+  renewables: 'NA',
+  contact: 'msedcl.lonavala@mah.gov.in'
+},
+{
+  id: 'T3',
+  coordinates: [18.5204, 73.8567],
+  corridor: 'JNPT/Navi Mumbai – Pune',
+  highway: 'NH 48',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2300 m²',
+  amenities: 'Urban garage, EV recharge, food stop',
+  substation: 'MSEDCL Pune West (~2.0 km)',
+  renewables: 'NA',
+  contact: 'msedcl.punewest@mah.gov.in'
+},
+{
+  id: 'U1',
+  coordinates: [17.7000, 83.2185],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.2 km',
+  siteSize: '2100 m²',
+  amenities: 'Fuel, dhaba, food court',
+  substation: 'APEPDCL Vizag North (~1.6 km)',
+  renewables: 'NA',
+  contact: 'apepdcl.vizag@ap.gov.in'
+},
+{
+  id: 'U2',
+  coordinates: [18.5000, 84.0000],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Parking lot, EV rest station, dhaba',
+  substation: 'APEPDCL Srikakulam (~1.8 km)',
+  renewables: 'NA',
+  contact: 'apepdcl.srikakulam@ap.gov.in'
+},
+{
+  id: 'U3',
+  coordinates: [19.3115, 84.7941],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck halt, food plaza, tire service',
+  substation: 'OPTCL Brahmapur (~2.0 km)',
+  renewables: 'NA',
+  contact: 'optcl.brahmapur@odisha.gov.in'
 }
 
+
+]
 
 ];
 
