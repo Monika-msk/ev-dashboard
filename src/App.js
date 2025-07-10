@@ -314,16 +314,17 @@ const siteData = [  {
 },
 {
   id: 'G2',
-  coordinates: [88.1167, 22.0333],
+  coordinates: [88.1053, 22.0901],
   corridor: 'Kolkata – Haldia',
   highway: 'NH 41',
-  distanceFromHighway: '2.5 km',
-  siteSize: '2300 m²',
-  amenities: 'Truck terminal, dhaba, fuel station',
-  substation: 'WBSEDCL Haldia Port Grid (~1.7 km)',
-  renewables: 'Floating solar nearby',
-  contact: 'haldianutgrid@wb.gov.in'
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel station, dhaba, truck rest zone',
+  substation: 'WBSEDCL Mahishadal (~2.0 km)',
+  renewables: 'Rooftop solar at depot',
+  contact: 'wbsedcl.mahishadal@wb.gov.in'
 },
+
   {
   id: 'G3',
   coordinates: [88.0704, 22.0207],
@@ -822,28 +823,30 @@ const siteData = [  {
 },
 {
   id: 'S2',
-  coordinates: [75.6793, 14.6397],
-  corridor: 'Hubballi – Chitradurga',
-  highway: 'NH 48',
-  distanceFromHighway: '2.5 km',
-  siteSize: '2200 m²',
-  amenities: 'Truck repair, parking, dhaba',
-  substation: 'GESCOM Haveri (~2.0 km)',
-  renewables: 'NA',
-  contact: 'gescom.haveri@karnataka.gov.in'
-},
-{
-  id: 'S3',
-  coordinates: [76.4052, 14.2206],
+  coordinates: [75.6592, 14.5735],
   corridor: 'Hubballi – Chitradurga',
   highway: 'NH 48',
   distanceFromHighway: '2.1 km',
   siteSize: '2300 m²',
-  amenities: 'Rest area, garage, canteen',
-  substation: 'GESCOM Chitradurga (~1.6 km)',
-  renewables: 'NA',
+  amenities: 'Truck repair, dhaba cluster, fuel',
+  substation: 'GESCOM Haveri (~2.2 km)',
+  renewables: 'Canal-top solar visible nearby',
+  contact: 'gescom.haveri@karnataka.gov.in'
+},
+
+{
+  id: 'S3',
+  coordinates: [76.2421, 14.1278],
+  corridor: 'Hubballi – Chitradurga',
+  highway: 'NH 48',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2200 m²',
+  amenities: 'Logistics rest stop, fuel, workshop',
+  substation: 'GESCOM Chitradurga (~1.7 km)',
+  renewables: 'Rooftop PV nearby',
   contact: 'gescom.chitradurga@karnataka.gov.in'
 },
+
 {
   id: 'T1',
   coordinates: [73.0563, 19.0290],
@@ -870,16 +873,17 @@ const siteData = [  {
 },
 {
   id: 'T3',
-  coordinates: [73.8567, 18.5204],
+  coordinates: [73.6982, 18.6521],
   corridor: 'Navi Mumbai – Pune',
-  highway: 'NH 48',
-  distanceFromHighway: '2.4 km',
+  highway: 'NH 60',
+  distanceFromHighway: '2.6 km',
   siteSize: '2400 m²',
-  amenities: 'Parking, rest stop, dhaba',
-  substation: 'MSEDCL Pune Central (~1.9 km)',
+  amenities: 'Petrol station, parking, dhaba',
+  substation: 'MSEDCL Lonavala (~2.0 km)',
   renewables: 'NA',
-  contact: 'msedcl.pune@mah.gov.in'
+  contact: 'msedcl.lonavala@mah.gov.in'
 },
+
 {
   id: 'U1',
   coordinates: [83.3095, 17.7354],
@@ -894,28 +898,30 @@ const siteData = [  {
 },
 {
   id: 'U2',
-  coordinates: [84.0732, 18.7452],
-  corridor: 'Visakhapatnam – Brahmapur',
-  highway: 'NH 16',
-  distanceFromHighway: '2.6 km',
-  siteSize: '2300 m²',
-  amenities: 'Lay-by bay, fuel, dhaba',
-  substation: 'APEPDCL Srikakulam (~2.0 km)',
-  renewables: 'NA',
-  contact: 'apepdcl.sklm@ap.gov.in'
-},
-{
-  id: 'U3',
-  coordinates: [84.7763, 19.3117],
+  coordinates: [84.1056, 18.6794],
   corridor: 'Visakhapatnam – Brahmapur',
   highway: 'NH 16',
   distanceFromHighway: '2.5 km',
-  siteSize: '2400 m²',
-  amenities: 'Truck rest area, EV station',
-  substation: 'GEDCOL Brahmapur (~1.8 km)',
-  renewables: 'Rooftop solar in nearby plant',
-  contact: 'gedcol.brahmapur@odisha.gov.in'
+  siteSize: '2300 m²',
+  amenities: 'Workshop, tea shop, fuel',
+  substation: 'APEPDCL Palasa (~2.0 km)',
+  renewables: 'Rooftop solar active',
+  contact: 'apepdcl.palasa@ap.gov.in'
 },
+
+{
+  id: 'U3',
+  coordinates: [84.7691, 19.3160],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2400 m²',
+  amenities: 'Truck bay, food plaza, fuel',
+  substation: 'TPSODL Brahmapur (~1.8 km)',
+  renewables: 'Rooftop installations present',
+  contact: 'tpsodl.brahmapur@odisha.gov.in'
+},
+
 {
   id: 'V1',
   coordinates: [76.8421, 30.6539],
