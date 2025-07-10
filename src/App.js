@@ -409,7 +409,7 @@ const siteData = [  {
   substation: 'JBVNL Dhanbad East (~1.4 km)',
   renewables: 'BCCL rooftop solar in vicinity',
   contact: 'jbvnl.dhanbad@jharkhand.gov.in'
-}
+},
   {
     id: 'I2',
     coordinates: [86.9261, 23.2335],
