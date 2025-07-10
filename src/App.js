@@ -302,29 +302,29 @@ const siteData = [  {
   },
   {
   id: 'G1',
-  coordinates: [88.3373, 22.5448],
-  corridor: 'Kolkata – Haldia',
-  highway: 'NH 41',
-  distanceFromHighway: '2.1 km',
-  siteSize: '2100 m²',
-  amenities: 'Rest zone, fuel station, dhaba',
-  substation: 'WBSEDCL Haldia Industrial Substation (~1.9 km)',
-  renewables: 'Rooftop solar near IOC terminal',
-  contact: 'wbsedcl.haldia@wb.gov.in'
-},
-{
-  id: 'G2',
-  coordinates: [88.1829, 22.1863],
+  coordinates: [88.2645, 22.5293],
   corridor: 'Kolkata – Haldia',
   highway: 'NH 41',
   distanceFromHighway: '2.3 km',
-  siteSize: '2200 m²',
-  amenities: 'Truck halt, repair shop, dhaba',
-  substation: 'WBSEDCL Kolaghat Grid (~2.5 km)',
-  renewables: 'Nearby canal-top solar installation',
-  contact: 'wbsedcl.kolaghat@wb.gov.in'
+  siteSize: '2100 m²',
+  amenities: 'Petrol station, rest zone, small truck bay',
+  substation: 'WBSEDCL Uluberia (~1.6 km)',
+  renewables: 'Nearby rooftop solar',
+  contact: 'wbsedcl.uluberia@wb.gov.in'
 },
 {
+  id: 'G2',
+  coordinates: [88.1167, 22.0333],
+  corridor: 'Kolkata – Haldia',
+  highway: 'NH 41',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Truck terminal, dhaba, fuel station',
+  substation: 'WBSEDCL Haldia Port Grid (~1.7 km)',
+  renewables: 'Floating solar nearby',
+  contact: 'haldianutgrid@wb.gov.in'
+},
+  {
   id: 'G3',
   coordinates: [88.0704, 22.0207],
   corridor: 'Kolkata – Haldia',
@@ -374,18 +374,18 @@ const siteData = [  {
     renewables: 'NA',
     contact: 'pspcl.ambala@punjab.gov.in'
   },
-  {
-    id: 'H4',
-    coordinates: [76.7794, 30.7333],
-    corridor: 'Delhi – Chandigarh',
-    highway: 'NH 44',
-    distanceFromHighway: '2.4 km',
-    siteSize: '2400 m²',
-    amenities: 'Rest stop, tea shops',
-    substation: 'PSPCL Chandigarh (~1.5 km)',
-    renewables: 'Rooftop installations visible',
-    contact: 'pspcl.chandigarh@punjab.gov.in'
-  },
+ {
+  id: 'H4',
+  coordinates: [76.7861, 30.7086],
+  corridor: 'Delhi – Chandigarh',
+  highway: 'NH 44',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2400 m²',
+  amenities: 'Rest stop, tea shops, repair bay',
+  substation: 'PSPCL Chandigarh Sector 28 (~1.6 km)',
+  renewables: 'Rooftop solar clusters nearby',
+  contact: 'pspcl.chandigarh@punjab.gov.in'
+},
   {
     id: 'H5',
     coordinates: [76.8654, 30.5165],
@@ -399,17 +399,17 @@ const siteData = [  {
     contact: 'pspcl.zirakpur@punjab.gov.in'
   },
   {
-    id: 'I1',
-    coordinates: [86.4304, 23.7957],
-    corridor: 'Dhanbad – Kolkata',
-    highway: 'NH 18',
-    distanceFromHighway: '2.2 km',
-    siteSize: '2200 m²',
-    amenities: 'Rest station, fuel, food',
-    substation: 'JBVNL Dhanbad (~1.5 km)',
-    renewables: 'BCCL rooftop solar',
-    contact: 'jbvnl.dhanbad@jharkhand.gov.in'
-  },
+  id: 'I1',
+  coordinates: [86.4239, 23.7901],
+  corridor: 'Dhanbad – Kolkata',
+  highway: 'NH 18',
+  distanceFromHighway: '2.1 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck rest stop, dhaba, petrol pump',
+  substation: 'JBVNL Dhanbad East (~1.4 km)',
+  renewables: 'BCCL rooftop solar in vicinity',
+  contact: 'jbvnl.dhanbad@jharkhand.gov.in'
+}
   {
     id: 'I2',
     coordinates: [86.9261, 23.2335],
