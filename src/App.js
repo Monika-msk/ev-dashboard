@@ -553,7 +553,44 @@ const siteData = [  {
   substation: 'UPPCL Agra South (~2.4 km)',
   renewables: 'NA',
   contact: 'uppcl.agra@up.gov.in'
+},
+{
+  id: 'P1',
+   coordinates: [86.4050, 23.7800],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 18',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2000 m²',
+  amenities: 'Petrol pump (~1 km), truck parking (~800 m), dhaba (~500 m)',
+  substation: '132 kV JBVNL feeder; East Basuria Colliery Substation (~1.1 km)',
+  renewables: 'Upcoming BCCL PV Park (28 MW), railway rooftop solar nearby',
+  contact: 'bccl.cmp@gov.in | +91-326-2230195'
+},
+{
+  id: 'P2',
+  coordinates: [85.3000, 23.3200],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 20',
+  distanceFromHighway: '2.0 km',
+  siteSize: '1800 m²',
+  amenities: 'Petrol pump (~700 m), dhabas (~1 km), hotel (~1.5 km)',
+  substation: '20 MVA Tatisilwai Substation (~1.2 km)',
+  renewables: 'Rooftop/canal-top solar zone (JREDA cluster)',
+  contact: 'jiada.rnc@gmail.com | +91-651-2460125'
+},
+{
+  id: 'P3',
+  coordinates: [86.1185, 22.8020],
+  corridor: 'Dhanbad – Ranchi – Jamshedpur',
+  highway: 'NH 33',
+  distanceFromHighway: '2.8 km',
+  siteSize: '2200 m²',
+  amenities: 'Petrol pump (~600 m), dhaba (~1 km), workshops, truck parking (~900 m)',
+  substation: 'Adityapur-1 Substation (132/33 kV, ~1 km)',
+  renewables: 'Tata rooftop solar & industrial PV cluster',
+  contact: 'aiada1972@gmail.com | +91-657-2371693'
 }
+
 
 
 
