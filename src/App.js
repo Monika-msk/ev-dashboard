@@ -626,6 +626,79 @@ const siteData = [  {
   renewables: 'Rooftop PV in nearby port area',
   contact: 'getco.mundra@gujarat.gov.in'
 },
+{
+  id: 'N1',
+  coordinates: [80.7750, 16.5512],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.1 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel pump, dhaba, parking',
+  substation: 'APSPDCL Gannavaram (~1.6 km)',
+  renewables: 'NA',
+  contact: 'apspdcl.gannavaram@ap.gov.in'
+},
+{
+  id: 'N2',
+  coordinates: [79.6800, 17.2100],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'EV rest stop, workshop, hotel',
+  substation: 'TSSPDCL Suryapet (~1.8 km)',
+  renewables: 'Rooftop solar active',
+  contact: 'tsspdcl.suryapet@ts.gov.in'
+},
+{
+  id: 'N3',
+  coordinates: [78.5400, 17.3850],
+  corridor: 'Vijayawada – Hyderabad',
+  highway: 'NH 65',
+  distanceFromHighway: '2.7 km',
+  siteSize: '2400 m²',
+  amenities: 'Metro edge, cafe, logistics',
+  substation: 'TSSPDCL Hyderabad South (~2.1 km)',
+  renewables: 'NA',
+  contact: 'tsspdcl.hyderabad@ts.gov.in'
+},
+{
+  id: 'O1',
+  coordinates: [72.9835, 19.2424],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel station, dhaba cluster',
+  substation: 'MSEDCL Thane (~2.0 km)',
+  renewables: 'NA',
+  contact: 'msedcl.thane@mah.gov.in'
+},
+{
+  id: 'O2',
+  coordinates: [73.4101, 19.6352],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2100 m²',
+  amenities: 'Truck bay, café, repairs',
+  substation: 'MSEDCL Shahapur (~1.9 km)',
+  renewables: 'NA',
+  contact: 'msedcl.shahapur@mah.gov.in'
+},
+{
+  id: 'O3',
+  coordinates: [73.7898, 19.9975],
+  corridor: 'Mumbai – Nashik',
+  highway: 'NH 160',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2300 m²',
+  amenities: 'Parking, dhaba, EV outlet',
+  substation: 'MSEDCL Nashik (~1.5 km)',
+  renewables: 'Rooftop solar nearby',
+  contact: 'msedcl.nashik@mah.gov.in'
+},
+
 
 {
   id: 'P1',
