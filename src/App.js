@@ -555,6 +555,79 @@ const siteData = [  {
   contact: 'uppcl.agra@up.gov.in'
 },
 {
+  id: 'L1',
+  coordinates: [86.6086, 20.3165],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 53',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck stop, petrol pump, food plaza',
+  substation: 'OPTCL Paradeep (~2.1 km)',
+  renewables: 'Rooftop solar visible',
+  contact: 'optcl.paradeep@odisha.gov.in'
+},
+{
+  id: 'L2',
+  coordinates: [85.9819, 21.3000],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 53',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2100 m²',
+  amenities: 'Parking zone, repair shop, dhaba',
+  substation: 'OPTCL Jajpur (~1.9 km)',
+  renewables: 'NA',
+  contact: 'optcl.jajpur@odisha.gov.in'
+},
+{
+  id: 'L3',
+  coordinates: [85.4086, 22.0951],
+  corridor: 'Paradeep – Barbil',
+  highway: 'NH 520',
+  distanceFromHighway: '2.8 km',
+  siteSize: '2300 m²',
+  amenities: 'Logistics yard, hotel, fuel',
+  substation: 'OPTCL Barbil (~1.6 km)',
+  renewables: 'Industrial rooftop solar nearby',
+  contact: 'optcl.barbil@odisha.gov.in'
+},
+{
+  id: 'M1',
+  coordinates: [72.5500, 23.0700],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 41',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck lay-by, fuel station, eatery',
+  substation: 'GETCO Sanand (~1.9 km)',
+  renewables: 'NA',
+  contact: 'getco.sanand@gujarat.gov.in'
+},
+{
+  id: 'M2',
+  coordinates: [71.5700, 22.5300],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 41',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2100 m²',
+  amenities: 'Food court, parking, dhaba',
+  substation: 'GETCO Morbi (~2.0 km)',
+  renewables: 'NA',
+  contact: 'getco.morbi@gujarat.gov.in'
+},
+{
+  id: 'M3',
+  coordinates: [69.7200, 22.8300],
+  corridor: 'Ahmedabad – Mundra',
+  highway: 'NH 41',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Port side truck zone, services',
+  substation: 'GETCO Mundra (~1.8 km)',
+  renewables: 'Rooftop PV in nearby port area',
+  contact: 'getco.mundra@gujarat.gov.in'
+},
+
+{
   id: 'P1',
    coordinates: [86.4050, 23.7800],
   corridor: 'Dhanbad – Ranchi – Jamshedpur',
