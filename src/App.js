@@ -301,29 +301,43 @@ const siteData = [  {
     contact: 'tangedco.salem@tn.gov.in'
   },
   {
-    id: 'G1',
-    coordinates: [88.3639, 22.5726],
-    corridor: 'Kolkata – Haldia',
-    highway: 'NH 41',
-    distanceFromHighway: '2.4 km',
-    siteSize: '2100 m²',
-    amenities: 'Port rest area, city fuel, food',
-    substation: 'WBSEDCL Kolkata Central (~1.9 km)',
-    renewables: 'Urban rooftop PV',
-    contact: 'wbsedcl.kolkata@wb.gov.in'
-  },
-  {
-    id: 'G2',
-    coordinates: [88.1167, 22.0333],
-    corridor: 'Kolkata – Haldia',
-    highway: 'NH 41',
-    distanceFromHighway: '2.3 km',
-    siteSize: '2200 m²',
-    amenities: 'Dockside hub, heavy halt zone',
-    substation: 'Haldia Port Grid (~1.7 km)',
-    renewables: 'Floating solar in Haldia',
-    contact: 'haldianutgrid@wb.gov.in'
-  },
+  id: 'G1',
+  coordinates: [88.3373, 22.5448],
+  corridor: 'Kolkata – Haldia',
+  highway: 'NH 41',
+  distanceFromHighway: '2.1 km',
+  siteSize: '2100 m²',
+  amenities: 'Rest zone, fuel station, dhaba',
+  substation: 'WBSEDCL Haldia Industrial Substation (~1.9 km)',
+  renewables: 'Rooftop solar near IOC terminal',
+  contact: 'wbsedcl.haldia@wb.gov.in'
+},
+{
+  id: 'G2',
+  coordinates: [88.1829, 22.1863],
+  corridor: 'Kolkata – Haldia',
+  highway: 'NH 41',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck halt, repair shop, dhaba',
+  substation: 'WBSEDCL Kolaghat Grid (~2.5 km)',
+  renewables: 'Nearby canal-top solar installation',
+  contact: 'wbsedcl.kolaghat@wb.gov.in'
+},
+{
+  id: 'G3',
+  coordinates: [88.0704, 22.0207],
+  corridor: 'Kolkata – Haldia',
+  highway: 'NH 41',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2300 m²',
+  amenities: 'Port-side truck bay, workshop, café',
+  substation: 'WBSEDCL Haldia Port Feeder (~1.7 km)',
+  renewables: 'Port rooftop solar nearby',
+  contact: 'wbsedcl.port@wb.gov.in'
+},
+
+  
   {
     id: 'H1',
     coordinates: [76.9928, 28.6572],
