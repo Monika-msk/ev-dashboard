@@ -882,7 +882,152 @@ const siteData = [  {
   substation: 'MSEDCL Lonavala (~2.0 km)',
   renewables: 'NA',
   contact: 'msedcl.lonavala@mah.gov.in'
+},
+{
+  id: 'U1',
+  coordinates: [83.2957, 17.8905],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2200 m²',
+  amenities: 'Fuel station, tea stall, parking',
+  substation: 'APEPDCL Bheemili (~1.8 km)',
+  renewables: 'NA',
+  contact: 'apepdcl.bheemili@ap.gov.in'
+},
+{
+  id: 'U2',
+  coordinates: [84.3271, 19.0574],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Highway café, mechanic zone, rest stop',
+  substation: 'TPNODL Brahmapur (~2.0 km)',
+  renewables: 'Rooftop PV visible',
+  contact: 'tpnodl.brahmapur@odisha.gov.in'
+},
+{
+  id: 'U3',
+  coordinates: [84.7778, 19.3099],
+  corridor: 'Visakhapatnam – Brahmapur',
+  highway: 'NH 16',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2100 m²',
+  amenities: 'EV halt, fuel outlet, open lay-by',
+  substation: 'TPNODL Chhatrapur (~1.9 km)',
+  renewables: 'NA',
+  contact: 'tpnodl.chhatrapur@odisha.gov.in'
+},
+{
+  id: 'V1',
+  coordinates: [76.7815, 30.7352],
+  corridor: 'Chandigarh – Ludhiana – Amritsar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2100 m²',
+  amenities: 'Truck bay, food court, city entry point',
+  substation: 'PSPCL Chandigarh (~1.6 km)',
+  renewables: 'Rooftop PV visible',
+  contact: 'pspcl.chd@punjab.gov.in'
+},
+{
+  id: 'V2',
+  coordinates: [75.8701, 30.9124],
+  corridor: 'Chandigarh – Ludhiana – Amritsar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Workshop, dhaba cluster, fuel pump',
+  substation: 'PSPCL Ludhiana East (~2.1 km)',
+  renewables: 'NA',
+  contact: 'pspcl.ludhiana@punjab.gov.in'
+},
+{
+  id: 'V3',
+  coordinates: [74.8723, 31.6340],
+  corridor: 'Chandigarh – Ludhiana – Amritsar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2200 m²',
+  amenities: 'Industrial zone entry, rest zone',
+  substation: 'PSPCL Amritsar (~1.7 km)',
+  renewables: 'Rooftop solar in cluster',
+  contact: 'pspcl.amritsar@punjab.gov.in'
+},
+{
+  id: 'W1',
+  coordinates: [80.0895, 13.2141],
+  corridor: 'Chennai – Ongole',
+  highway: 'NH 16',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2100 m²',
+  amenities: 'Fuel station, mechanic hub, dhaba',
+  substation: 'TANGEDCO Red Hills (~2.0 km)',
+  renewables: 'NA',
+  contact: 'tangedco.redhills@tn.gov.in'
+},
+{
+  id: 'W2',
+  coordinates: [79.8532, 14.1751],
+  corridor: 'Chennai – Ongole',
+  highway: 'NH 16',
+  distanceFromHighway: '2.5 km',
+  siteSize: '2300 m²',
+  amenities: 'Parking lot, EV feeder, café zone',
+  substation: 'APEPDCL Nellore (~1.8 km)',
+  renewables: 'NA',
+  contact: 'apepdcl.nellore@ap.gov.in'
+},
+{
+  id: 'W3',
+  coordinates: [80.0343, 15.5045],
+  corridor: 'Chennai – Ongole',
+  highway: 'NH 16',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2400 m²',
+  amenities: 'Truck halt, auto repair, highway stop',
+  substation: 'APEPDCL Ongole (~2.0 km)',
+  renewables: 'Visible rooftop PV nearby',
+  contact: 'apepdcl.ongole@ap.gov.in'
+},
+{
+  id: 'X1',
+  coordinates: [76.8483, 30.3792],
+  corridor: 'Ambala – Jalandhar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.4 km',
+  siteSize: '2100 m²',
+  amenities: 'Fuel station, truck workshop',
+  substation: 'PSPCL Ambala (~1.9 km)',
+  renewables: 'NA',
+  contact: 'pspcl.ambala@punjab.gov.in'
+},
+{
+  id: 'X2',
+  coordinates: [75.9817, 30.7783],
+  corridor: 'Ambala – Jalandhar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.3 km',
+  siteSize: '2300 m²',
+  amenities: 'Logistics zone, fuel, dhaba',
+  substation: 'PSPCL Phillaur (~2.0 km)',
+  renewables: 'Rooftop solar visible',
+  contact: 'pspcl.phillaur@punjab.gov.in'
+},
+{
+  id: 'X3',
+  coordinates: [75.5762, 31.3260],
+  corridor: 'Ambala – Jalandhar',
+  highway: 'NH 44',
+  distanceFromHighway: '2.6 km',
+  siteSize: '2200 m²',
+  amenities: 'Truck terminal, auto repair, hotel',
+  substation: 'PSPCL Jalandhar (~1.8 km)',
+  renewables: 'NA',
+  contact: 'pspcl.jalandhar@punjab.gov.in'
 }
+
 
 
 ];
