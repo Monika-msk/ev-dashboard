@@ -1269,35 +1269,25 @@ export default function EVMapDashboard() {
     </button>
   </div>
 
-  <div ref={mapContainer} style={{ flex: 1, position: 'relative' }} />
+  <div style={{ flex: 1, position: 'relative' }}>
+  <div ref={mapContainer} style={{ height: '100%', width: '100%' }} />
+
+  {/* Floating Buttons */}
   <div style={{
-  position: 'absolute',
-  top: 10,
-  right: 10,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-  zIndex: 1
-}}>
-  <button
-    onClick={() => mapRef.current?.zoomIn()}
-    style={floatingBtnStyle}
-  >
-    +
-  </button>
-  <button
-    onClick={() => mapRef.current?.zoomOut()}
-    style={floatingBtnStyle}
-  >
-    −
-  </button>
-  <button
-    onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })}
-    style={floatingBtnStyle}
-  >
-    ⟳
-  </button>
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    zIndex: 1
+  }}>
+    <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
+    <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
+    <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
+  </div>
 </div>
+
 
 </div>
 
