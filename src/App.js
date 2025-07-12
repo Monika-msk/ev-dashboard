@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { toPng } from 'html-to-image';
-import { saveAs } from 'file-saver';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ'; 
+mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ';
 
-const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
+const corridorDefs = [
+   { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
   { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
   { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
   { id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
@@ -35,8 +34,11 @@ const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13
 { id: 'U', name: 'Visakhapatnam – Brahmapur', src: [83.2185, 17.6868], dst: [84.7941, 19.3115], color: '#E84393' },
 { id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], dst: [74.8723, 31.6340], color: '#FDCB6E' },
 { id: 'W', name: 'Chennai – Ongole', src: [80.2707, 13.0827], dst: [80.0483, 15.5036], color: '#A29BFE' },
-{ id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }]; // Add your corridor data here
-const siteData = [ {
+{ id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }
+];
+
+const siteData = [
+   {
     id: 'A1',
     coordinates: [79.9053, 12.5144],
     corridor: 'Chennai – Villupuram',
@@ -1028,7 +1030,9 @@ const siteData = [ {
   contact: 'pspcl.jalandhar@punjab.gov.in'
 }
 
-]; // Add your site data here
+
+  
+];
 
 export default function EVMapDashboard() {
   const mapContainer = useRef(null);
@@ -1040,82 +1044,41 @@ export default function EVMapDashboard() {
   const [routes, setRoutes] = useState({});
   const initialView = { center: [80, 22], zoom: 4.3 };
 
-  const handleExportImage = () => {
-    if (!mapContainer.current) return;
-    toPng(mapContainer.current)
-      .then((dataUrl) => {
-        saveAs(dataUrl, 'ev-map.png');
-      })
-      .catch((err) => {
-        console.error('Failed to export map as image', err);
-      });
-  };
-
-  const handlePrintMap = () => {
-    const printWindow = window.open('', 'PrintMap', 'height=800,width=1200');
-    if (!printWindow) return;
-
-    const html = `
-      <html>
-      <head><title>Print Map</title></head>
-      <body style="margin:0;">
-        ${mapContainer.current?.outerHTML}
-      </body>
-      </html>
-    `;
-
-    printWindow.document.write(html);
-    printWindow.document.close();
-    printWindow.focus();
-
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 1000);
-  };
-
   useEffect(() => {
     if (mapRef.current) mapRef.current.remove();
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: mapStyle,
-      center: initialView.center,
-      zoom: initialView.zoom
-    });
+    const map = new mapboxgl.Map({ container: mapContainer.current, style: mapStyle, ...initialView });
     mapRef.current = map;
   }, [mapStyle]);
 
   useEffect(() => {
-    const fetchAllRoutes = async () => {
-      const fetchedRoutes = {};
+    const fetchRoutes = async () => {
+      const fetched = {};
       for (const c of corridorDefs) {
-        let coordString = `${c.src[0]},${c.src[1]}`;
-        if (c.via) coordString += `;${c.via[0]},${c.via[1]}`;
-        coordString += `;${c.dst[0]},${c.dst[1]}`;
-        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+        let coordStr = `${c.src[0]},${c.src[1]}`;
+        if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
+        coordStr += `;${c.dst[0]},${c.dst[1]}`;
+        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
         try {
           const res = await fetch(url);
           const json = await res.json();
-          if (json.routes?.[0]?.geometry) fetchedRoutes[c.id] = json.routes[0].geometry;
+          if (json.routes?.[0]?.geometry) fetched[c.id] = json.routes[0].geometry;
         } catch (err) {
-          console.error(`Failed to fetch route ${c.id}:`, err);
+          console.error(`Route error ${c.id}:`, err);
         }
       }
-      setRoutes(fetchedRoutes);
+      setRoutes(fetched);
     };
-    fetchAllRoutes();
+    fetchRoutes();
   }, []);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !Object.keys(routes).length) return;
+
     corridorDefs.forEach(c => {
       const layerId = `route-${c.id}`;
       if (map.getSource(layerId)) return;
-      map.addSource(layerId, {
-        type: 'geojson',
-        data: { type: 'Feature', geometry: routes[c.id] }
-      });
+      map.addSource(layerId, { type: 'geojson', data: { type: 'Feature', geometry: routes[c.id] } });
       map.addLayer({
         id: layerId,
         type: 'line',
@@ -1123,9 +1086,7 @@ export default function EVMapDashboard() {
         layout: { 'line-join': 'round', 'line-cap': 'round' },
         paint: { 'line-color': c.color, 'line-width': 4 }
       });
-      map.on('click', layerId, () => {
-        setActiveCorridor(prev => (prev === c.id ? null : c.id));
-      });
+      map.on('click', layerId, () => setActiveCorridor(prev => prev === c.id ? null : c.id));
     });
   }, [routes]);
 
@@ -1136,10 +1097,8 @@ export default function EVMapDashboard() {
     const newMarkers = [];
     let filtered = [];
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = siteData.filter(site =>
-        (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
-        Object.values(site).some(val => typeof val === 'string' && val.toLowerCase().includes(query)));
+      const q = searchQuery.toLowerCase();
+      filtered = siteData.filter(site => (activeCorridor ? site.id.startsWith(activeCorridor) : true) && Object.values(site).some(v => typeof v === 'string' && v.toLowerCase().includes(q)));
     } else if (activeCorridor) {
       filtered = siteData.filter(site => site.id.startsWith(activeCorridor));
     }
@@ -1148,17 +1107,15 @@ export default function EVMapDashboard() {
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
         <strong>${site.id} – ${site.corridor}</strong><br/>
         <b>Highway:</b> ${site.highway}<br/>
-        <b>Distance from Highway:</b> ${site.distanceFromHighway}<br/>
-        <b>Coordinates:</b> ${site.coordinates[1].toFixed(4)}, ${site.coordinates[0].toFixed(4)}<br/>
-        <b>Site Size:</b> ${site.siteSize}<br/>
+        <b>Distance:</b> ${site.distanceFromHighway}<br/>
+        <b>Coords:</b> ${site.coordinates[1]}, ${site.coordinates[0]}<br/>
+        <b>Size:</b> ${site.siteSize}<br/>
         <b>Amenities:</b> ${site.amenities}<br/>
         <b>Substation:</b> ${site.substation}<br/>
         <b>Renewables:</b> ${site.renewables}<br/>
         <b>Contact:</b> ${site.contact}`);
-      const marker = new mapboxgl.Marker({ color: '#D91F1F' })
-        .setLngLat(site.coordinates)
-        .setPopup(popup)
-        .addTo(map);
+
+      const marker = new mapboxgl.Marker({ color: '#D91F1F' }).setLngLat(site.coordinates).setPopup(popup).addTo(map);
       newMarkers.push(marker);
       bounds.extend(site.coordinates);
     });
@@ -1172,49 +1129,39 @@ export default function EVMapDashboard() {
     boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
   };
 
+  const downloadMapAsImage = () => {
+    const canvas = mapRef.current.getCanvas();
+    const image = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.download = 'ev-map.png';
+    link.href = image;
+    link.click();
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
-      <div style={{
-        width: window.innerWidth < 768 ? '100%' : '260px',
-        height: window.innerWidth < 768 ? 'auto' : '100vh',
-        background: '#f4f4f4', borderRight: '1px solid #ccc',
-        padding: '12px', overflowY: 'auto', flexShrink: 0
-      }}>
+      <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', height: 'auto', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
         <h3 style={{ textAlign: 'center' }}>EV Corridors</h3>
         {corridorDefs.map(c => (
-          <button key={c.id} onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))} style={{
-            display: 'block', width: '100%', marginBottom: '8px', padding: '8px 12px',
-            background: activeCorridor === c.id ? c.color : '#fff',
-            color: activeCorridor === c.id ? '#fff' : '#333',
-            border: `1px solid ${c.color}`, borderRadius: '4px',
-            textAlign: 'left', cursor: 'pointer', fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
-          }}>{c.id} - {c.name}</button>
+          <button key={c.id} onClick={() => setActiveCorridor(prev => prev === c.id ? null : c.id)} style={{ display: 'block', width: '100%', marginBottom: '8px', padding: '8px 12px', background: activeCorridor === c.id ? c.color : '#fff', color: activeCorridor === c.id ? '#fff' : '#333', border: `1px solid ${c.color}`, borderRadius: '4px', textAlign: 'left', cursor: 'pointer', fontWeight: activeCorridor === c.id ? 'bold' : 'normal' }}>{c.id} - {c.name}</button>
         ))}
       </div>
-
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{
-          padding: '10px', background: '#f4f4f4', borderBottom: '1px solid #ccc',
-          display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'space-between', alignItems: 'center'
-        }}>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search site by ID or keyword (e.g. A1, dhaba)" style={{
-              flex: '1 1 250px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc'
-            }} />
-          <button onClick={() => setMapStyle(prev => prev === 'mapbox://styles/mapbox/streets-v11' ? 'mapbox://styles/mapbox/satellite-v9' : 'mapbox://styles/mapbox/streets-v11')} style={{
-            padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer'
-          }}>Toggle Satellite View</button>
-          <button onClick={handleExportImage} style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>Export Map as PNG</button>
-          <button onClick={handlePrintMap} style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>Print Map</button>
+        <div style={{ padding: '10px', background: '#f4f4f4', borderBottom: '1px solid #ccc', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'space-between', alignItems: 'center' }}>
+          <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search site by ID or keyword" style={{ flex: '1 1 100%', minWidth: '200px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }} />
+          <button onClick={() => setMapStyle(prev => prev === 'mapbox://styles/mapbox/streets-v11' ? 'mapbox://styles/mapbox/satellite-v9' : 'mapbox://styles/mapbox/streets-v11')} style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>🛰 Toggle Satellite</button>
         </div>
-
-        <div style={{ flex: 1, position: 'relative' }}>
-          <div ref={mapContainer} style={{ height: '100%', width: '100%' }} />
-          <div style={{ position: 'absolute', top: 70, right: 10, display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 1 }}>
-            <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
-            <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
-            <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
-          </div>
+        <div ref={mapContainer} style={{ flex: 1, position: 'relative', minHeight: '300px' }} />
+        <div style={{ position: 'absolute', top: 80, right: 10, display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 1 }}>
+          <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
+          <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
+          <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
+          <button onClick={downloadMapAsImage} style={floatingBtnStyle}>🖼 Export</button>
+          <button onClick={handlePrint} style={floatingBtnStyle}>🖨 Print</button>
         </div>
       </div>
     </div>
