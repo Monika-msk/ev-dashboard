@@ -1042,14 +1042,19 @@ export default function EVMapDashboard() {
   const [routes, setRoutes] = useState({});
 
   useEffect(() => {
-   mapRef.current = new mapboxgl.Map({
-  container: mapContainer.current,
-  style: mapStyle, // ✅ uses dynamic state
-  center: [80, 22],
-  zoom: 4.3
-});
+  if (mapRef.current) {
+    mapRef.current.remove(); // remove previous map instance
+  }
 
-  }, []);
+  const map = new mapboxgl.Map({
+    container: mapContainer.current,
+    style: mapStyle,
+    center: [80, 22],
+    zoom: 4.3
+  });
+
+  mapRef.current = map;
+}, [mapStyle]); 
 
   useEffect(() => {
   const fetchAllRoutes = async () => {
