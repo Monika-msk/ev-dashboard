@@ -1040,6 +1040,11 @@ export default function EVMapDashboard() {
   const [markerRefs, setMarkerRefs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [routes, setRoutes] = useState({});
+  const initialView = {
+  center: [80, 22],
+  zoom: 4.3
+};
+
 
   useEffect(() => {
   if (mapRef.current) {
@@ -1171,6 +1176,16 @@ export default function EVMapDashboard() {
       map.fitBounds(bounds, { padding: 100 });
     }
   }, [activeCorridor, searchQuery]);
+  const floatingBtnStyle = {
+  padding: '8px 10px',
+  fontSize: '16px',
+  borderRadius: '4px',
+  border: '1px solid #ccc',
+  backgroundColor: '#fff',
+  cursor: 'pointer',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+};
+
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
@@ -1255,6 +1270,35 @@ export default function EVMapDashboard() {
   </div>
 
   <div ref={mapContainer} style={{ flex: 1, position: 'relative' }} />
+  <div style={{
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  zIndex: 1
+}}>
+  <button
+    onClick={() => mapRef.current?.zoomIn()}
+    style={floatingBtnStyle}
+  >
+    +
+  </button>
+  <button
+    onClick={() => mapRef.current?.zoomOut()}
+    style={floatingBtnStyle}
+  >
+    −
+  </button>
+  <button
+    onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })}
+    style={floatingBtnStyle}
+  >
+    ⟳
+  </button>
+</div>
+
 </div>
 
     </div>
