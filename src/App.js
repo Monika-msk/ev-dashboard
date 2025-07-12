@@ -1274,14 +1274,15 @@ export default function EVMapDashboard() {
 
   {/* Floating Buttons */}
   <div style={{
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    zIndex: 1
-  }}>
+  position: 'absolute',
+  top: 70, // ⬅️ Changed from 10 to 70 to avoid overlapping
+  right: 10,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  zIndex: 1
+}}>
+
     <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
     <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
     <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
