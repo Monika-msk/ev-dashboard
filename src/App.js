@@ -1035,18 +1035,20 @@ const siteData = [  {
 export default function EVMapDashboard() {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
+  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
   const [activeCorridor, setActiveCorridor] = useState(null);
   const [markerRefs, setMarkerRefs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [routes, setRoutes] = useState({});
 
   useEffect(() => {
-    mapRef.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [80, 22],
-      zoom: 4.3
-    });
+   mapRef.current = new mapboxgl.Map({
+  container: mapContainer.current,
+  style: mapStyle, // ✅ uses dynamic state
+  center: [80, 22],
+  zoom: 4.3
+});
+
   }, []);
 
   useEffect(() => {
@@ -1201,21 +1203,49 @@ export default function EVMapDashboard() {
 
       {/* Right section: search + map */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '10px', background: '#fff', borderBottom: '1px solid #ccc' }}>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
-            style={{
-              width: '400px',
-              padding: '8px',
-              fontSize: '14px',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
-        </div>
+        <div style={{
+  padding: '10px',
+  background: '#fff',
+  borderBottom: '1px solid #ccc',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}}>
+  <input
+    type="text"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
+    style={{
+      width: '65%',
+      padding: '8px',
+      fontSize: '14px',
+      borderRadius: '4px',
+      border: '1px solid #ccc'
+    }}
+  />
+  <button
+    onClick={() =>
+      setMapStyle(prev =>
+        prev === 'mapbox://styles/mapbox/streets-v11'
+          ? 'mapbox://styles/mapbox/satellite-v9'
+          : 'mapbox://styles/mapbox/streets-v11'
+      )
+    }
+    style={{
+      marginLeft: '12px',
+      padding: '8px 10px',
+      fontSize: '13px',
+      borderRadius: '4px',
+      border: '1px solid #ccc',
+      backgroundColor: '#eee',
+      cursor: 'pointer'
+    }}
+  >
+    Toggle Satellite View
+  </button>
+</div>
+
         <div ref={mapContainer} style={{ flex: 1 }} />
       </div>
     </div>
