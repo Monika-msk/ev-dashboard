@@ -1206,53 +1206,57 @@ export default function EVMapDashboard() {
         ))}
       </div>
 
-      {/* Right section: search + map */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{
-  padding: '10px',
-  background: '#fff',
-  borderBottom: '1px solid #ccc',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between'
-}}>
-  <input
-    type="text"
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-    placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
-    style={{
-      width: '65%',
-      padding: '8px',
-      fontSize: '14px',
-      borderRadius: '4px',
-      border: '1px solid #ccc'
-    }}
-  />
-  <button
-    onClick={() =>
-      setMapStyle(prev =>
-        prev === 'mapbox://styles/mapbox/streets-v11'
-          ? 'mapbox://styles/mapbox/satellite-v9'
-          : 'mapbox://styles/mapbox/streets-v11'
-      )
-    }
-    style={{
-      marginLeft: '12px',
-      padding: '8px 10px',
-      fontSize: '13px',
-      borderRadius: '4px',
-      border: '1px solid #ccc',
-      backgroundColor: '#eee',
-      cursor: 'pointer'
-    }}
-  >
-    Toggle Satellite View
-  </button>
+      
+        {/* Right section: search + map */}
+<div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+  <div style={{
+    padding: '10px',
+    background: '#f4f4f4',
+    borderBottom: '1px solid #ccc',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '10px',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }}>
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      placeholder="Search site by ID or keyword (e.g. A1, dhaba)"
+      style={{
+        flex: '1 1 250px',
+        padding: '8px',
+        fontSize: '14px',
+        borderRadius: '4px',
+        border: '1px solid #ccc'
+      }}
+    />
+    
+    <button
+      onClick={() =>
+        setMapStyle(prev =>
+          prev === 'mapbox://styles/mapbox/streets-v11'
+            ? 'mapbox://styles/mapbox/satellite-v9'
+            : 'mapbox://styles/mapbox/streets-v11'
+        )
+      }
+      style={{
+        padding: '8px 10px',
+        fontSize: '13px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        backgroundColor: '#eee',
+        cursor: 'pointer'
+      }}
+    >
+      Toggle Satellite View
+    </button>
+  </div>
+
+  <div ref={mapContainer} style={{ flex: 1, position: 'relative' }} />
 </div>
 
-        <div ref={mapContainer} style={{ flex: 1 }} />
-      </div>
     </div>
   );
 }
