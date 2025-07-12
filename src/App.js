@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ';
+mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your token
 
 const corridorDefs = [
    { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
@@ -38,7 +38,7 @@ const corridorDefs = [
 ];
 
 const siteData = [
-   {
+  {
     id: 'A1',
     coordinates: [79.9053, 12.5144],
     corridor: 'Chennai – Villupuram',
@@ -1030,8 +1030,6 @@ const siteData = [
   contact: 'pspcl.jalandhar@punjab.gov.in'
 }
 
-
-  
 ];
 
 export default function EVMapDashboard() {
@@ -1044,12 +1042,20 @@ export default function EVMapDashboard() {
   const [routes, setRoutes] = useState({});
   const initialView = { center: [80, 22], zoom: 4.3 };
 
+  // Initialize map
   useEffect(() => {
     if (mapRef.current) mapRef.current.remove();
-    const map = new mapboxgl.Map({ container: mapContainer.current, style: mapStyle, ...initialView });
+
+    const map = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: mapStyle,
+      ...initialView
+    });
+
     mapRef.current = map;
   }, [mapStyle]);
 
+  // Fetch all route lines
   useEffect(() => {
     const fetchRoutes = async () => {
       const fetched = {};
@@ -1071,6 +1077,7 @@ export default function EVMapDashboard() {
     fetchRoutes();
   }, []);
 
+  // Draw routes
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !Object.keys(routes).length) return;
@@ -1086,22 +1093,26 @@ export default function EVMapDashboard() {
         layout: { 'line-join': 'round', 'line-cap': 'round' },
         paint: { 'line-color': c.color, 'line-width': 4 }
       });
-      map.on('click', layerId, () => setActiveCorridor(prev => prev === c.id ? null : c.id));
+      map.on('click', layerId, () => setActiveCorridor(prev => (prev === c.id ? null : c.id)));
     });
   }, [routes]);
 
+  // Show filtered markers
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     markerRefs.forEach(m => m.remove());
     const newMarkers = [];
     let filtered = [];
+
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      filtered = siteData.filter(site => (activeCorridor ? site.id.startsWith(activeCorridor) : true) && Object.values(site).some(v => typeof v === 'string' && v.toLowerCase().includes(q)));
+      filtered = siteData.filter(site => (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
+        Object.values(site).some(v => typeof v === 'string' && v.toLowerCase().includes(q)));
     } else if (activeCorridor) {
       filtered = siteData.filter(site => site.id.startsWith(activeCorridor));
     }
+
     const bounds = new mapboxgl.LngLatBounds();
     filtered.forEach(site => {
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
@@ -1119,16 +1130,12 @@ export default function EVMapDashboard() {
       newMarkers.push(marker);
       bounds.extend(site.coordinates);
     });
+
     setMarkerRefs(newMarkers);
     if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 100 });
   }, [activeCorridor, searchQuery]);
 
-  const floatingBtnStyle = {
-    padding: '8px 10px', fontSize: '16px', borderRadius: '4px',
-    border: '1px solid #ccc', backgroundColor: '#fff', cursor: 'pointer',
-    boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
-  };
-
+  // Export map as PNG
   const downloadMapAsImage = () => {
     const canvas = mapRef.current.getCanvas();
     const image = canvas.toDataURL('image/png');
@@ -1138,24 +1145,69 @@ export default function EVMapDashboard() {
     link.click();
   };
 
+  // Print the map
   const handlePrint = () => {
     window.print();
   };
 
+  const floatingBtnStyle = {
+    padding: '8px 10px',
+    fontSize: '16px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
+    boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
+      {/* Sidebar */}
       <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', height: 'auto', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
         <h3 style={{ textAlign: 'center' }}>EV Corridors</h3>
         {corridorDefs.map(c => (
-          <button key={c.id} onClick={() => setActiveCorridor(prev => prev === c.id ? null : c.id)} style={{ display: 'block', width: '100%', marginBottom: '8px', padding: '8px 12px', background: activeCorridor === c.id ? c.color : '#fff', color: activeCorridor === c.id ? '#fff' : '#333', border: `1px solid ${c.color}`, borderRadius: '4px', textAlign: 'left', cursor: 'pointer', fontWeight: activeCorridor === c.id ? 'bold' : 'normal' }}>{c.id} - {c.name}</button>
+          <button key={c.id} onClick={() => setActiveCorridor(prev => prev === c.id ? null : c.id)} style={{
+            display: 'block',
+            width: '100%',
+            marginBottom: '8px',
+            padding: '8px 12px',
+            background: activeCorridor === c.id ? c.color : '#fff',
+            color: activeCorridor === c.id ? '#fff' : '#333',
+            border: `1px solid ${c.color}`,
+            borderRadius: '4px',
+            textAlign: 'left',
+            cursor: 'pointer',
+            fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
+          }}>
+            {c.id} - {c.name}
+          </button>
         ))}
       </div>
+
+      {/* Map Section */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '10px', background: '#f4f4f4', borderBottom: '1px solid #ccc', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'space-between', alignItems: 'center' }}>
-          <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search site by ID or keyword" style={{ flex: '1 1 100%', minWidth: '200px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }} />
-          <button onClick={() => setMapStyle(prev => prev === 'mapbox://styles/mapbox/streets-v11' ? 'mapbox://styles/mapbox/satellite-v9' : 'mapbox://styles/mapbox/streets-v11')} style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>🛰 Toggle Satellite</button>
+          <input
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search site by ID or keyword"
+            style={{ flex: '1 1 100%', minWidth: '200px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+          <button onClick={() =>
+            setMapStyle(prev =>
+              prev === 'mapbox://styles/mapbox/streets-v11'
+                ? 'mapbox://styles/mapbox/satellite-v9'
+                : 'mapbox://styles/mapbox/streets-v11'
+            )
+          } style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>
+            🛰 Toggle Satellite
+          </button>
         </div>
+
+        {/* Map Container */}
         <div ref={mapContainer} style={{ flex: 1, position: 'relative', minHeight: '300px' }} />
+
+        {/* Floating Buttons */}
         <div style={{ position: 'absolute', top: 80, right: 10, display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 1 }}>
           <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
           <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
