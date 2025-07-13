@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'your_mapbox_token_here'; // Replace with your actual token
+mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ'; // Replace with your actual token
 
 // Import your siteData and corridorDefs from a separate file if preferred
 const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
@@ -1027,22 +1027,25 @@ export default function App() {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
 
+  const [loading, setLoading] = useState(true);
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
   const [activeCorridor, setActiveCorridor] = useState(null);
   const [markerRefs, setMarkerRefs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [routes, setRoutes] = useState({});
   const initialView = { center: [80, 22], zoom: 4.3 };
+  
+
 
   const floatingBtnStyle = {
-    padding: '8px 10px',
-    fontSize: '18px',
-    borderRadius: '50%',
-    border: '1px solid #ccc',
-    backgroundColor: '#fff',
-    cursor: 'pointer',
-    boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
-  };
+  padding: '8px 10px',
+  fontSize: '18px',
+  borderRadius: '50%',
+  border: '1px solid #ccc',
+  backgroundColor: '#fff',
+  cursor: 'pointer',
+  boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+};
 
   useEffect(() => {
     if (mapRef.current) mapRef.current.remove();
@@ -1057,25 +1060,16 @@ export default function App() {
   }, [mapStyle]);
 
   useEffect(() => {
-    const fetchRoutes = async () => {
-      const fetched = {};
-      for (const c of corridorDefs) {
-        let coordStr = `${c.src[0]},${c.src[1]}`;
-        if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
-        coordStr += `;${c.dst[0]},${c.dst[1]}`;
-        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-        try {
-          const res = await fetch(url);
-          const json = await res.json();
-          if (json.routes?.[0]?.geometry) fetched[c.id] = json.routes[0].geometry;
-        } catch (err) {
-          console.error(`Route error ${c.id}:`, err);
-        }
-      }
-      setRoutes(fetched);
-    };
-    fetchRoutes();
-  }, []);
+  const fetchRoutes = async () => {
+    const fetched = {};
+    for (const c of corridorDefs) {
+      ...
+    }
+    setRoutes(fetched);
+    setLoading(false); // ✅ Add this here once data is fetched
+  };
+  fetchRoutes();
+}, []);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -1187,7 +1181,14 @@ export default function App() {
         </div>
 
         {/* Map Container */}
-        <div ref={mapContainer} className="map-container" />
+        {loading ? (
+  <div style={{ textAlign: 'center', padding: '30px', fontSize: '18px' }}>
+    Loading map, please wait...
+  </div>
+) : (
+  <div ref={mapContainer} className="map-container" />
+)}
+
 
         {/* Zoom/Fit Buttons */}
         <div style={{ position: 'absolute', top: 80, right: 10, display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 1 }}>
