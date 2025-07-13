@@ -1130,30 +1130,7 @@ export default function EVMapDashboard() {
     if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 100 });
   }, [activeCorridor, searchQuery]);
 
-  // Export map as PNG
-  const downloadMapAsImage = () => {
-    const canvas = mapRef.current.getCanvas();
-    const image = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.download = 'ev-map.png';
-    link.href = image;
-    link.click();
-  };
-
-  // Print the map
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const floatingBtnStyle = {
-    padding: '8px 10px',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    backgroundColor: '#fff',
-    cursor: 'pointer',
-    boxShadow: '0 1px 4px rgba(0,0,0,0.3)'
-  };
+  
 
   return (
     <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
