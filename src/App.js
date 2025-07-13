@@ -1063,13 +1063,28 @@ export default function App() {
   const fetchRoutes = async () => {
     const fetched = {};
     for (const c of corridorDefs) {
-      ...
+      let coordStr = `${c.src[0]},${c.src[1]}`;
+      if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
+      coordStr += `;${c.dst[0]},${c.dst[1]}`;
+
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.routes?.[0]?.geometry) {
+          fetched[c.id] = json.routes[0].geometry;
+        }
+      } catch (err) {
+        console.error(`Route error ${c.id}:`, err);
+      }
     }
     setRoutes(fetched);
-    setLoading(false); // ✅ Add this here once data is fetched
+    setLoading(false); // ✅ Added this to show map after routes are loaded
   };
+
   fetchRoutes();
 }, []);
+
 
   useEffect(() => {
     const map = mapRef.current;
