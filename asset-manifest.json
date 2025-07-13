@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ev-dashboard/static/css/main.e69754a9.css",
-    "main.js": "/ev-dashboard/static/js/main.7721fa4d.js",
+    "main.css": "/ev-dashboard/static/css/main.6d046267.css",
+    "main.js": "/ev-dashboard/static/js/main.0553fe3d.js",
     "index.html": "/ev-dashboard/index.html",
-    "main.e69754a9.css.map": "/ev-dashboard/static/css/main.e69754a9.css.map",
-    "main.7721fa4d.js.map": "/ev-dashboard/static/js/main.7721fa4d.js.map"
+    "main.6d046267.css.map": "/ev-dashboard/static/css/main.6d046267.css.map",
+    "main.0553fe3d.js.map": "/ev-dashboard/static/js/main.0553fe3d.js.map"
   },
   "entrypoints": [
-    "static/css/main.e69754a9.css",
-    "static/js/main.7721fa4d.js"
+    "static/css/main.6d046267.css",
+    "static/js/main.0553fe3d.js"
   ]
 }
