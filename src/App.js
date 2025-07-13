@@ -1027,13 +1027,13 @@ export default function App() {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
 
-  const [loading, setLoading] = useState(true);
-  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
-  const [activeCorridor, setActiveCorridor] = useState(null);
-  const [markerRefs, setMarkerRefs] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [routes, setRoutes] = useState({});
-  const initialView = { center: [80, 22], zoom: 4.3 };
+const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
+const [activeCorridor, setActiveCorridor] = useState(null);
+const [markerRefs, setMarkerRefs] = useState([]);
+const [searchQuery, setSearchQuery] = useState('');
+const [routes, setRoutes] = useState({});
+const [loading, setLoading] = useState(true); // ✅ THIS LINE
+
   
 
 
@@ -1048,16 +1048,20 @@ export default function App() {
 };
 
   useEffect(() => {
-    if (mapRef.current) mapRef.current.remove();
+  // ✅ Only create the map when map container is ready and loading is false
+  if (!mapContainer.current || loading) return;
 
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: mapStyle,
-      ...initialView
-    });
+  if (mapRef.current) mapRef.current.remove();
 
-    mapRef.current = map;
-  }, [mapStyle]);
+  const map = new mapboxgl.Map({
+    container: mapContainer.current,
+    style: mapStyle,
+    ...initialView
+  });
+
+  mapRef.current = map;
+}, [mapStyle, loading]); // ✅ Add loading as a dependency
+
 
   useEffect(() => {
   const fetchRoutes = async () => {
@@ -1148,70 +1152,103 @@ export default function App() {
   }, [activeCorridor, searchQuery]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
-      {/* Sidebar */}
-      <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
-        <h2>EV Corridors</h2>
-        {corridorDefs.map(c => (
-          <button
-            key={c.id}
-            onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
-            style={{
-              display: 'block',
-              width: '100%',
-              marginBottom: '8px',
-              padding: '8px 12px',
-              background: activeCorridor === c.id ? c.color : '#fff',
-              color: activeCorridor === c.id ? '#fff' : '#333',
-              border: `1px solid ${c.color}`,
-              borderRadius: '4px',
-              textAlign: 'left',
-              cursor: 'pointer',
-              fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
-            }}
-          >
-            {c.id} - {c.name}
-          </button>
-        ))}
-      </div>
+  <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
+    {/* Sidebar */}
+    <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
+      <h2>EV Corridors</h2>
+      {corridorDefs.map(c => (
+        <button
+          key={c.id}
+          onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
+          style={{
+            display: 'block',
+            width: '100%',
+            marginBottom: '8px',
+            padding: '8px 12px',
+            background: activeCorridor === c.id ? c.color : '#fff',
+            color: activeCorridor === c.id ? '#fff' : '#333',
+            border: `1px solid ${c.color}`,
+            borderRadius: '4px',
+            textAlign: 'left',
+            cursor: 'pointer',
+            fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
+          }}
+        >
+          {c.id} - {c.name}
+        </button>
+      ))}
+    </div>
 
-      {/* Map Section */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
-        <div style={{ padding: '10px', background: '#f4f4f4', borderBottom: '1px solid #ccc', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-          <input
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search site by ID or keyword"
-            style={{ flex: '1', minWidth: '200px', padding: '10px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-          />
-          <button onClick={() =>
+    {/* Map Section */}
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      <div style={{
+        padding: '10px',
+        background: '#f4f4f4',
+        borderBottom: '1px solid #ccc',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '10px'
+      }}>
+        <input
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          placeholder="Search site by ID or keyword"
+          style={{
+            flex: '1',
+            minWidth: '200px',
+            padding: '10px',
+            fontSize: '16px',
+            borderRadius: '4px',
+            border: '1px solid #ccc'
+          }}
+        />
+        <button
+          onClick={() =>
             setMapStyle(prev =>
               prev === 'mapbox://styles/mapbox/streets-v11'
                 ? 'mapbox://styles/mapbox/satellite-v9'
                 : 'mapbox://styles/mapbox/streets-v11'
             )
-          } style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>
-            Toggle Satellite
-          </button>
+          }
+          style={{
+            padding: '10px 12px',
+            fontSize: '14px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            backgroundColor: '#eee',
+            cursor: 'pointer'
+          }}
+        >
+          Toggle Satellite
+        </button>
+      </div>
+
+      {/* Map Container */}
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: '30px', fontSize: '18px' }}>
+          Loading map, please wait...
         </div>
+      ) : (
+        <div ref={mapContainer} className="map-container" />
+      )}
 
-        {/* Map Container */}
-        {loading ? (
-  <div style={{ textAlign: 'center', padding: '30px', fontSize: '18px' }}>
-    Loading map, please wait...
-  </div>
-) : (
-  <div ref={mapContainer} className="map-container" />
-)}
-
-
-        {/* Zoom/Fit Buttons */}
-        <div style={{ position: 'absolute', top: 80, right: 10, display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 1 }}>
-          <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
-          <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
-          <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
-        </div>
+      {/* Zoom/Fit Buttons */}
+      <div style={{
+        position: 'absolute',
+        top: 80,
+        right: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        zIndex: 1
+      }}>
+        <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
+        <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
+        <button onClick={() =>
+          mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })
+        } style={floatingBtnStyle}>⟳</button>
       </div>
     </div>
-  );
+  </div>
+);
 }
