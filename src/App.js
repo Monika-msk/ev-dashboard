@@ -2,10 +2,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ'; // Replace with your actual token
+// Replace with your actual token
+mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
 
-// Import your siteData and corridorDefs from a separate file if preferred
-const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
+// Dummy placeholders (replace with your actual data)
+const corridorDefs = [ { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
 { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
 { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
 { id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
@@ -28,9 +29,8 @@ const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13
 { id: 'U', name: 'Visakhapatnam – Brahmapur', src: [83.2185, 17.6868], dst: [84.7941, 19.3115], color: '#E84393' },
 { id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], dst: [74.8723, 31.6340], color: '#FDCB6E' },
 { id: 'W', name: 'Chennai – Ongole', src: [80.2707, 13.0827], dst: [80.0483, 15.5036], color: '#A29BFE' },
-{ id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }
-];
-const siteData = [ {
+{ id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }]; // Your corridor definitions
+const siteData = [{
     id: 'A1',
     coordinates: [79.9053, 12.5144],
     corridor: 'Chennai – Villupuram',
@@ -498,7 +498,7 @@ const siteData = [ {
     siteSize: '2400 m²',
     amenities: 'EV lounge, tire center',
     substation: 'MSEDCL Nashik South (~2.1 km)',
-    renewables: 'Rooftop solar installed',
+  renewables: 'Rooftop solar installed',
     contact: 'msedcl.nashik@mah.gov.in'
   },
   {
@@ -798,7 +798,7 @@ const siteData = [ {
   highway: 'NH 48',
   distanceFromHighway: '2.2 km',
   siteSize: '2400 m²',
-  amenities: 'Truck stop, eatery, parking',
+amenities: 'Truck stop, eatery, parking',
   substation: 'MGVCL Vadodara Central (~1.8 km)',
   renewables: 'Rooftop PV in area',
   contact: 'mgvcl.vadodara@gujarat.gov.in'
@@ -1020,117 +1020,144 @@ const siteData = [ {
   substation: 'PSPCL Jalandhar (~1.8 km)',
   renewables: 'NA',
   contact: 'pspcl.jalandhar@punjab.gov.in'
-}
-];
+}]; // Your site data
+
+// Table cell styles
+const thStyle = {
+  padding: '8px',
+  border: '1px solid #ccc',
+  fontWeight: 'bold',
+  fontSize: '14px',
+  background: '#f4f4f4',
+  position: 'sticky',
+  top: 0,
+  zIndex: 1
+};
+
+const tdStyle = {
+  padding: '8px',
+  border: '1px solid #eee',
+  fontSize: '13px',
+  background: '#fff'
+};
 
 export default function App() {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
 
-const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
-const [activeCorridor, setActiveCorridor] = useState(null);
-const [markerRefs, setMarkerRefs] = useState([]);
-const [searchQuery, setSearchQuery] = useState('');
-const [routes, setRoutes] = useState({});
-const [loading, setLoading] = useState(true); // ✅ THIS LINE
+  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11');
+  const [activeCorridor, setActiveCorridor] = useState(null);
+  const [markerRefs, setMarkerRefs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [routes, setRoutes] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [showTable, setShowTable] = useState(false);
 
-  
-
-
-  const floatingBtnStyle = {
-  padding: '8px 10px',
-  fontSize: '18px',
-  borderRadius: '50%',
-  border: '1px solid #ccc',
-  backgroundColor: '#fff',
-  cursor: 'pointer',
-  boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
-};
-
-  useEffect(() => {
-  // ✅ Only create the map when map container is ready and loading is false
-  if (!mapContainer.current || loading) return;
-
-  if (mapRef.current) mapRef.current.remove();
-
-  const map = new mapboxgl.Map({
-    container: mapContainer.current,
-    style: mapStyle,
-    ...initialView
-  });
-
-  mapRef.current = map;
-}, [mapStyle, loading]); // ✅ Add loading as a dependency
-
-
-  useEffect(() => {
-  const fetchRoutes = async () => {
-    const fetched = {};
-    for (const c of corridorDefs) {
-      let coordStr = `${c.src[0]},${c.src[1]}`;
-      if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
-      coordStr += `;${c.dst[0]},${c.dst[1]}`;
-
-      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        if (json.routes?.[0]?.geometry) {
-          fetched[c.id] = json.routes[0].geometry;
-        }
-      } catch (err) {
-        console.error(`Route error ${c.id}:`, err);
-      }
-    }
-    setRoutes(fetched);
-    setLoading(false); // ✅ Added this to show map after routes are loaded
+  const initialView = {
+    center: [78.9629, 20.5937],
+    zoom: 5
   };
 
-  fetchRoutes();
-}, []);
+  const floatingBtnStyle = {
+    padding: '8px 10px',
+    fontSize: '18px',
+    borderRadius: '50%',
+    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+  };
 
+  // Fetch map and style
+  useEffect(() => {
+    if (!mapContainer.current || loading) return;
+    if (mapRef.current) mapRef.current.remove();
 
+    const map = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: mapStyle,
+      ...initialView
+    });
+
+    mapRef.current = map;
+  }, [mapStyle, loading]);
+
+  // Fetch routes from Mapbox Directions API
+  useEffect(() => {
+    const fetchRoutes = async () => {
+      const fetched = {};
+      for (const c of corridorDefs) {
+        let coordStr = `${c.src[0]},${c.src[1]}`;
+        if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
+        coordStr += `;${c.dst[0]},${c.dst[1]}`;
+
+        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+        try {
+          const res = await fetch(url);
+          const json = await res.json();
+          if (json.routes?.[0]?.geometry) {
+            fetched[c.id] = json.routes[0].geometry;
+          }
+        } catch (err) {
+          console.error(`Route error ${c.id}:`, err);
+        }
+      }
+      setRoutes(fetched);
+      setLoading(false);
+    };
+    fetchRoutes();
+  }, []);
+
+  // Add routes to map
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !Object.keys(routes).length) return;
 
-    corridorDefs.forEach(c => {
-      const layerId = `route-${c.id}`;
-      if (map.getSource(layerId)) return;
+    map.on('load', () => {
+      corridorDefs.forEach(c => {
+        const layerId = `route-${c.id}`;
+        if (map.getSource(layerId)) return;
 
-      map.addSource(layerId, { type: 'geojson', data: { type: 'Feature', geometry: routes[c.id] } });
-      map.addLayer({
-        id: layerId,
-        type: 'line',
-        source: layerId,
-        layout: { 'line-join': 'round', 'line-cap': 'round' },
-        paint: { 'line-color': c.color, 'line-width': 4 }
+        map.addSource(layerId, {
+          type: 'geojson',
+          data: { type: 'Feature', geometry: routes[c.id] }
+        });
+
+        map.addLayer({
+          id: layerId,
+          type: 'line',
+          source: layerId,
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: { 'line-color': c.color, 'line-width': 4 }
+        });
+
+        map.on('click', layerId, () =>
+          setActiveCorridor(prev => (prev === c.id ? null : c.id))
+        );
       });
-
-      map.on('click', layerId, () => setActiveCorridor(prev => (prev === c.id ? null : c.id)));
     });
   }, [routes]);
 
+  // Filter logic
+  const filteredSites = searchQuery.trim()
+    ? siteData.filter(site =>
+        (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
+        Object.values(site).some(
+          v => typeof v === 'string' && v.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+    : (activeCorridor ? siteData.filter(site => site.id.startsWith(activeCorridor)) : siteData);
+
+  // Add markers
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
 
     markerRefs.forEach(m => m.remove());
     const newMarkers = [];
-    let filtered = [];
-
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      filtered = siteData.filter(site =>
-        (activeCorridor ? site.id.startsWith(activeCorridor) : true) &&
-        Object.values(site).some(v => typeof v === 'string' && v.toLowerCase().includes(q))
-      );
-    } else if (activeCorridor) {
-      filtered = siteData.filter(site => site.id.startsWith(activeCorridor));
-    }
-
     const bounds = new mapboxgl.LngLatBounds();
-    filtered.forEach(site => {
+
+    filteredSites.forEach(site => {
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
         <strong>${site.id} – ${site.corridor}</strong><br/>
         <b>Highway:</b> ${site.highway}<br/>
@@ -1142,7 +1169,11 @@ const [loading, setLoading] = useState(true); // ✅ THIS LINE
         <b>Renewables:</b> ${site.renewables}<br/>
         <b>Contact:</b> ${site.contact}`);
 
-      const marker = new mapboxgl.Marker({ color: '#D91F1F' }).setLngLat(site.coordinates).setPopup(popup).addTo(map);
+      const marker = new mapboxgl.Marker({ color: '#D91F1F' })
+        .setLngLat(site.coordinates)
+        .setPopup(popup)
+        .addTo(map);
+
       newMarkers.push(marker);
       bounds.extend(site.coordinates);
     });
@@ -1152,103 +1183,185 @@ const [loading, setLoading] = useState(true); // ✅ THIS LINE
   }, [activeCorridor, searchQuery]);
 
   return (
-  <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
-    {/* Sidebar */}
-    <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
-      <h2>EV Corridors</h2>
-      {corridorDefs.map(c => (
-        <button
-          key={c.id}
-          onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
-          style={{
-            display: 'block',
-            width: '100%',
-            marginBottom: '8px',
-            padding: '8px 12px',
-            background: activeCorridor === c.id ? c.color : '#fff',
-            color: activeCorridor === c.id ? '#fff' : '#333',
-            border: `1px solid ${c.color}`,
-            borderRadius: '4px',
-            textAlign: 'left',
-            cursor: 'pointer',
-            fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
-          }}
-        >
-          {c.id} - {c.name}
-        </button>
-      ))}
-    </div>
-
-    {/* Map Section */}
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
-      <div style={{
-        padding: '10px',
-        background: '#f4f4f4',
-        borderBottom: '1px solid #ccc',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '10px'
-      }}>
-        <input
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          placeholder="Search site by ID or keyword"
-          style={{
-            flex: '1',
-            minWidth: '200px',
-            padding: '10px',
-            fontSize: '16px',
-            borderRadius: '4px',
-            border: '1px solid #ccc'
-          }}
-        />
-        <button
-          onClick={() =>
-            setMapStyle(prev =>
-              prev === 'mapbox://styles/mapbox/streets-v11'
-                ? 'mapbox://styles/mapbox/satellite-v9'
-                : 'mapbox://styles/mapbox/streets-v11'
-            )
-          }
-          style={{
-            padding: '10px 12px',
-            fontSize: '14px',
-            borderRadius: '4px',
-            border: '1px solid #ccc',
-            backgroundColor: '#eee',
-            cursor: 'pointer'
-          }}
-        >
-          Toggle Satellite
-        </button>
+    <div style={{ display: 'flex', flexDirection: window.innerWidth < 768 ? 'column' : 'row', height: '100vh' }}>
+      {/* Sidebar */}
+      <div style={{ width: window.innerWidth < 768 ? '100%' : '260px', background: '#f4f4f4', borderRight: '1px solid #ccc', padding: '12px', overflowY: 'auto' }}>
+        <h2>EV Corridors</h2>
+        {corridorDefs.map(c => (
+          <button
+            key={c.id}
+            onClick={() => setActiveCorridor(prev => (prev === c.id ? null : c.id))}
+            style={{
+              display: 'block',
+              width: '100%',
+              marginBottom: '8px',
+              padding: '8px 12px',
+              background: activeCorridor === c.id ? c.color : '#fff',
+              color: activeCorridor === c.id ? '#fff' : '#333',
+              border: `1px solid ${c.color}`,
+              borderRadius: '4px',
+              textAlign: 'left',
+              cursor: 'pointer',
+              fontWeight: activeCorridor === c.id ? 'bold' : 'normal'
+            }}
+          >
+            {c.id} - {c.name}
+          </button>
+        ))}
       </div>
 
-      {/* Map Container */}
-      {loading ? (
-        <div style={{ textAlign: 'center', padding: '30px', fontSize: '18px' }}>
-          Loading map, please wait...
+      {/* Map Section */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+        {/* Top bar */}
+        <div style={{
+          padding: '10px',
+          background: '#f4f4f4',
+          borderBottom: '1px solid #ccc',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '10px'
+        }}>
+          <input
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search site by ID or keyword"
+            style={{
+              flex: '1',
+              minWidth: '200px',
+              padding: '10px',
+              fontSize: '16px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+          />
+          <button
+            onClick={() =>
+              setMapStyle(prev =>
+                prev === 'mapbox://styles/mapbox/streets-v11'
+                  ? 'mapbox://styles/mapbox/satellite-v9'
+                  : 'mapbox://styles/mapbox/streets-v11'
+              )
+            }
+            style={{
+              padding: '10px 12px',
+              fontSize: '14px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              backgroundColor: '#eee',
+              cursor: 'pointer'
+            }}
+          >
+            Toggle Satellite
+          </button>
+          <button
+            onClick={() => setShowTable(true)}
+            style={{
+              padding: '10px 12px',
+              fontSize: '14px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              backgroundColor: '#eee',
+              cursor: 'pointer'
+            }}
+          >
+            Show All Sites
+          </button>
         </div>
-      ) : (
-        <div ref={mapContainer} className="map-container" />
-      )}
 
-      {/* Zoom/Fit Buttons */}
-      <div style={{
-        position: 'absolute',
-        top: 80,
-        right: 10,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-        zIndex: 1
-      }}>
-        <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
-        <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
-        <button onClick={() =>
-          mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })
-        } style={floatingBtnStyle}>⟳</button>
+        {/* Map */}
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '30px', fontSize: '18px' }}>
+            Loading map, please wait...
+          </div>
+        ) : (
+          <div ref={mapContainer} className="map-container" />
+        )}
+
+        {/* Zoom Buttons */}
+        <div style={{
+          position: 'absolute',
+          top: 80,
+          right: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          zIndex: 1
+        }}>
+          <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
+          <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
+          <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
+        </div>
+
+        {/* Modal Table */}
+        {showTable && (
+          <div style={{
+            position: 'fixed',
+            top: 0, left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <div style={{
+              background: '#fff',
+              padding: '20px',
+              borderRadius: '8px',
+              maxHeight: '90vh',
+              width: '95%',
+              overflowY: 'auto'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <h3>All EV Sites ({filteredSites.length})</h3>
+                <button
+                  onClick={() => setShowTable(false)}
+                  style={{
+                    padding: '6px 10px',
+                    background: '#d91f1f',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                  }}
+                >Close</button>
+              </div>
+
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    <th style={thStyle}>ID</th>
+                    <th style={thStyle}>Corridor</th>
+                    <th style={thStyle}>Highway</th>
+                    <th style={thStyle}>Distance</th>
+                    <th style={thStyle}>Size</th>
+                    <th style={thStyle}>Amenities</th>
+                    <th style={thStyle}>Substation</th>
+                    <th style={thStyle}>Renewables</th>
+                    <th style={thStyle}>Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredSites.map((site, i) => (
+                    <tr key={i}>
+                      <td style={tdStyle}>{site.id}</td>
+                      <td style={tdStyle}>{site.corridor}</td>
+                      <td style={tdStyle}>{site.highway}</td>
+                      <td style={tdStyle}>{site.distanceFromHighway}</td>
+                      <td style={tdStyle}>{site.siteSize}</td>
+                      <td style={tdStyle}>{site.amenities}</td>
+                      <td style={tdStyle}>{site.substation}</td>
+                      <td style={tdStyle}>{site.renewables}</td>
+                      <td style={tdStyle}>{site.contact}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
-  </div>
-);
+  );
 }
