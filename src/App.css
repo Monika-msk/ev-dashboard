@@ -1,12 +1,12 @@
-body, html, #root {
+html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: sans-serif;
   box-sizing: border-box;
 }
 
+/* Optional – only needed if you use this class */
 .map-container {
   height: 90vh;
   width: 100%;
