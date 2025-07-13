@@ -1195,7 +1195,7 @@ export default function EVMapDashboard() {
                 : 'mapbox://styles/mapbox/streets-v11'
             )
           } style={{ padding: '10px 12px', fontSize: '14px', borderRadius: '4px', border: '1px solid #ccc', backgroundColor: '#eee', cursor: 'pointer' }}>
-            🛰 Toggle Satellite
+             Toggle Satellite
           </button>
         </div>
 
@@ -1207,8 +1207,8 @@ export default function EVMapDashboard() {
           <button onClick={() => mapRef.current?.zoomIn()} style={floatingBtnStyle}>+</button>
           <button onClick={() => mapRef.current?.zoomOut()} style={floatingBtnStyle}>−</button>
           <button onClick={() => mapRef.current?.flyTo({ center: initialView.center, zoom: initialView.zoom })} style={floatingBtnStyle}>⟳</button>
-          <button onClick={downloadMapAsImage} style={floatingBtnStyle}>🖼 Export</button>
-          <button onClick={handlePrint} style={floatingBtnStyle}>🖨 Print</button>
+          <button onClick={downloadMapAsImage} style={floatingBtnStyle}> Export</button>
+          <button onClick={handlePrint} style={floatingBtnStyle}>Print</button>
         </div>
       </div>
     </div>
