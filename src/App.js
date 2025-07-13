@@ -6,27 +6,21 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4Y
 
 const corridorDefs = [
    { id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
-  { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
-  { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
-  { id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
-  { id: 'E', name: 'Coimbatore–Kochi', src: [76.9553, 11.0168], dst: [76.2673, 9.9312], color: '#FC5C65' },
-  { id: 'F', name: 'Coimbatore–Salem', src: [76.9553, 11.0168], dst: [78.1510, 11.6643], color: '#778CA3' },
-  { id: 'G', name: 'Kolkata–Haldia', src: [88.3639, 22.5726], dst: [88.1167, 22.0333], color: '#F7B731' },
-  { id: 'H', name: 'Delhi–Chandigarh', src: [77.1025, 28.7041], dst: [76.7794, 30.7333], color: '#B2BEC3' },
-  { id: 'I', name: 'Dhanbad–Kolkata', src: [86.4304, 23.7957], dst: [88.3639, 22.5726], color: '#4B6584' },
-  { id: 'J', name: 'Pune–Nashik', src: [73.8567, 18.5204], dst: [73.7898, 19.9975], color: '#55E6C1' },
-  { id: 'K', name: 'Delhi – Agra', src: [77.1025, 28.7041], dst: [78.0081, 27.1767], color: '#E17055' },
-  { id: 'L', name: 'Paradeep – Barbil', src: [86.6100, 20.3167], dst: [85.3967, 22.1006], color: '#00CEC9' },
-  { id: 'M', name: 'Ahmedabad – Mundra', src: [72.5714, 23.0225], dst: [69.7190, 22.8392], color: '#6C5CE7' },
-  { id: 'N', name: 'Vijayawada – Hyderabad', src: [80.6480, 16.5062], dst: [78.4867, 17.3850], color: '#FAB1A0' },
-  { id: 'O', name: 'Mumbai – Nashik', src: [72.8777, 19.0760], dst: [73.7898, 19.9975], color: '#81ECEC' },
-  {id: 'P',
-  name: 'Dhanbad – Ranchi – Jamshedpur',
-  src: [86.4304, 23.7957],          // Dhanbad
-  via: [85.3430, 23.3441],          // Ranchi (NEW)
-  dst: [86.2029, 22.8046],          // Jamshedpur
-  color: '#FD79A8'
-},
+{ id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
+{ id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
+{ id: 'D', name: 'Chennai–Bengaluru', src: [80.2707, 13.0827], dst: [77.5946, 12.9716], color: '#A55EEA' },
+{ id: 'E', name: 'Coimbatore–Kochi', src: [76.9553, 11.0168], dst: [76.2673, 9.9312], color: '#FC5C65' },
+{ id: 'F', name: 'Coimbatore–Salem', src: [76.9553, 11.0168], dst: [78.1510, 11.6643], color: '#778CA3' },
+{ id: 'G', name: 'Kolkata–Haldia', src: [88.3639, 22.5726], dst: [88.1167, 22.0333], color: '#F7B731' },
+{ id: 'H', name: 'Delhi–Chandigarh', src: [77.1025, 28.7041], dst: [76.7794, 30.7333], color: '#B2BEC3' },
+{ id: 'I', name: 'Dhanbad–Kolkata', src: [86.4304, 23.7957], dst: [88.3639, 22.5726], color: '#4B6584' },
+{ id: 'J', name: 'Pune–Nashik', src: [73.8567, 18.5204], dst: [73.7898, 19.9975], color: '#55E6C1' },
+{ id: 'K', name: 'Delhi – Agra', src: [77.1025, 28.7041], dst: [78.0081, 27.1767], color: '#E17055' },
+{ id: 'L', name: 'Paradeep – Barbil', src: [86.6100, 20.3167], dst: [85.3967, 22.1006], color: '#00CEC9' },
+{ id: 'M', name: 'Ahmedabad – Mundra', src: [72.5714, 23.0225], dst: [69.7190, 22.8392], color: '#6C5CE7' },
+{ id: 'N', name: 'Vijayawada – Hyderabad', src: [80.6480, 16.5062], dst: [78.4867, 17.3850], color: '#FAB1A0' },
+{ id: 'O', name: 'Mumbai – Nashik', src: [72.8777, 19.0760], dst: [73.7898, 19.9975], color: '#81ECEC' },
+{ id: 'P', name: 'Dhanbad – Ranchi – Jamshedpur', src: [86.4304, 23.7957], via: [85.3430, 23.3441], dst: [86.2029, 22.8046], color: '#FD79A8' },
 { id: 'Q', name: 'Pune – Kolhapur', src: [73.8567, 18.5204], dst: [74.2333, 16.7050], color: '#74B9FF' },
 { id: 'R', name: 'Surat – Vadodara', src: [72.8311, 21.1702], dst: [73.1812, 22.3072], color: '#D63031' },
 { id: 'S', name: 'Hubballi – Chitradurga', src: [75.1240, 15.3647], dst: [76.4039, 14.2222], color: '#00B894' },
@@ -35,6 +29,7 @@ const corridorDefs = [
 { id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], dst: [74.8723, 31.6340], color: '#FDCB6E' },
 { id: 'W', name: 'Chennai – Ongole', src: [80.2707, 13.0827], dst: [80.0483, 15.5036], color: '#A29BFE' },
 { id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }
+
 ];
 
 const siteData = [
@@ -64,7 +59,7 @@ const siteData = [
   },
   {
     id: 'A3',
-    coordinates: [79.6511, 12.2436],
+    coordinates: [79.6511, 12.2456],
     corridor: 'Chennai – Villupuram',
     highway: 'NH 32',
     distanceFromHighway: '2.7 km',
@@ -76,7 +71,7 @@ const siteData = [
   },
   {
     id: 'B1',
-    coordinates: [76.9947, 28.4526],
+    coordinates: [76.9969, 28.4506],
     corridor: 'Delhi – Jaipur',
     highway: 'NH 48',
     distanceFromHighway: '2.3 km',
@@ -88,7 +83,7 @@ const siteData = [
   },
   {
     id: 'B2',
-    coordinates: [76.8024, 28.2072],
+    coordinates: [76.8031, 28.2067],
     corridor: 'Delhi – Jaipur',
     highway: 'NH 48',
     distanceFromHighway: '2.7 km',
@@ -112,7 +107,7 @@ const siteData = [
   },
   {
     id: 'B4',
-    coordinates: [75.9702, 27.3895],
+    coordinates: [75.9717, 27.3881],
     corridor: 'Delhi – Jaipur',
     highway: 'NH 48',
     distanceFromHighway: '2.5 km',
@@ -148,7 +143,7 @@ const siteData = [
   },
   {
     id: 'C2',
-    coordinates: [81.9632, 16.9835],
+    coordinates: [81.9581, 16.9875],
     corridor: 'Vijayawada – Visakhapatnam',
     highway: 'NH 16',
     distanceFromHighway: '2.7 km',
@@ -160,7 +155,7 @@ const siteData = [
   },
   {
     id: 'C3',
-    coordinates: [83.2185, 17.6868],
+    coordinates: [83.2228, 17.6878],
     corridor: 'Vijayawada – Visakhapatnam',
     highway: 'NH 16',
     distanceFromHighway: '2.5 km',
@@ -172,7 +167,7 @@ const siteData = [
   },
    {
     id: 'D1',
-    coordinates: [80.0896, 13.0160],
+    coordinates: [80.0928, 13.0189],
     corridor: 'Chennai – Bengaluru',
     highway: 'NH 48',
     distanceFromHighway: '2.5 km',
@@ -196,7 +191,7 @@ const siteData = [
   },
   {
     id: 'D3',
-    coordinates: [77.7026, 12.9573],
+    coordinates: [77.7039, 12.9561],
     corridor: 'Chennai – Bengaluru',
     highway: 'NH 48',
     distanceFromHighway: '2.3 km',
