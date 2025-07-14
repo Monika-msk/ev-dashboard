@@ -1068,8 +1068,6 @@ export default function App() {
         const json = await res.json();
         if (json.routes?.[0]?.geometry) {
           fetched[c.id] = json.routes[0].geometry;
-        } else {
-          console.warn(`No geometry for ${c.id}`);
         }
       } catch (err) {
         console.error(`Error fetching route for ${c.id}:`, err);
@@ -1083,6 +1081,7 @@ export default function App() {
 
   fetchRoutes();
 }, []);
+
 
 
  useEffect(() => {
