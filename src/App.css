@@ -1,20 +1,10 @@
-html, body, #root {
-  margin: 0;
-  padding: 0;
+.app {
+  display: flex;
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
 }
-
 .map-container {
+  flex: 1;
+  margin-left: 300px; /* same as sidebar width */
   height: 100%;
-  width: 100%;
-}
-
-h2 {
-  text-align: center;
-  padding: 12px;
-  margin: 0;
-  background-color: #f8f8f8;
-  font-size: 20px;
 }

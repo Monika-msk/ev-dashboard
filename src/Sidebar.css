@@ -1,0 +1,38 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 300px;
+  background: #ffffff;
+  overflow-y: auto;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  z-index: 10;
+}
+.sidebar__title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.sidebar__list {
+  list-style: none;
+}
+.sidebar__btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 3px solid transparent;
+  border-left-width: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.sidebar__btn:hover,
+.sidebar__btn.active {
+  background: rgba(0, 0, 0, 0.05);
+}
+.sidebar__btn.active {
+  font-weight: 600;
+}
