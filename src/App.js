@@ -61,8 +61,14 @@ export default function App() {
     if (!mapRef.current) return;
 
     // Remove previous site markers
-    mapRef.current?.getCanvas().style.cursor = "";
-    mapRef.current?.queryRenderedFeatures({ layers: ["site-markers"] });
+    if (mapRef.current && mapRef.current.getCanvas) {
+  mapRef.current.getCanvas().style.cursor = "";
+}
+
+    if (mapRef.current && mapRef.current.queryRenderedFeatures) {
+  mapRef.current.queryRenderedFeatures({ layers: ["site-markers"] });
+}
+
 
     // Remove old site layer if it exists
     if (mapRef.current.getLayer("site-markers")) {
