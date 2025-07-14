@@ -1,4 +1,4 @@
-// ✅ UPDATED App.js (All fixes applied)
+// ✅ ORIGINAL FULL App.js — Complete and Clean Version from Start to End
 
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
@@ -6,7 +6,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ';
 
-// Import your corridorDefs and siteData from file or define inline as before
 const corridorDefs = [{ id: 'A', name: 'Chennai–Villupuram', src: [80.2707, 13.0827], dst: [79.4994, 11.9401], color: '#4B7BEC' },
 { id: 'B', name: 'Delhi–Jaipur', src: [77.1025, 28.7041], dst: [75.7873, 26.9124], color: '#2D98DA' },
 { id: 'C', name: 'Vijayawada–Visakhapatnam', src: [80.6480, 16.5062], dst: [83.2185, 17.6868], color: '#20BF6B' },
@@ -1039,7 +1038,7 @@ export default function App() {
 
   const initialView = {
     center: [78.9629, 20.5937],
-    zoom: 5,
+    zoom: 5
   };
 
   const tableHeaders = ['ID', 'Corridor', 'Highway', 'Distance', 'Size', 'Amenities', 'Substation', 'Renewables', 'Contact'];
@@ -1051,97 +1050,99 @@ export default function App() {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
       style: mapStyle,
-      ...initialView,
+      ...initialView
     });
 
     mapRef.current = map;
   }, [mapStyle]);
 
   useEffect(() => {
-    const fetchRoutes = async () => {
-      const cached = localStorage.getItem('cachedRoutes');
-      if (cached) {
-        setRoutes(JSON.parse(cached));
-        setLoadingRoutes(false);
-        return;
-      }
-      const fetched = {};
-      for (const c of corridorDefs) {
-        let coordStr = `${c.src[0]},${c.src[1]}`;
-        if (c.via) coordStr += `;${c.via[0]},${c.via[1]}`;
-        coordStr += `;${c.dst[0]},${c.dst[1]}`;
+  const fetchRoutes = async () => {
+    const fetched = {};
 
-        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-        try {
-          const res = await fetch(url);
-          const json = await res.json();
-          if (json.routes?.[0]?.geometry) {
-            fetched[c.id] = json.routes[0].geometry;
-          }
-        } catch (err) {
-          console.error(`Route error ${c.id}:`, err);
+    for (const c of corridorDefs) {
+      const coordStr = `${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}`;
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.routes?.[0]?.geometry) {
+          fetched[c.id] = json.routes[0].geometry;
+        } else {
+          console.warn(`No geometry for ${c.id}`);
         }
+      } catch (err) {
+        console.error(`Error fetching route for ${c.id}:`, err);
       }
-      setRoutes(fetched);
-      localStorage.setItem('cachedRoutes', JSON.stringify(fetched));
-      setLoadingRoutes(false);
-    };
-    fetchRoutes();
-  }, []);
-
-  useEffect(() => {
-    if (!activeCorridor && Object.keys(routes).length > 0) {
-      setActiveCorridor('A');
     }
-  }, [routes]);
 
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !Object.keys(routes).length) return;
+    console.log('Fetched all routes:', fetched);
+    setRoutes(fetched);
+    setLoadingRoutes(false);
+  };
 
-    map.on('load', () => {
-      corridorDefs.forEach(c => {
-        if (!routes[c.id]) return;
-        const layerId = `route-${c.id}`;
-        if (map.getSource(layerId)) return;
+  fetchRoutes();
+}, []);
 
+
+ useEffect(() => {
+  const map = mapRef.current;
+  if (!map || loadingRoutes) return;
+
+  const handleStyleLoad = () => {
+    corridorDefs.forEach(c => {
+      const layerId = `route-${c.id}`;
+      if (!routes[c.id] || map.getLayer(layerId)) return;
+
+      if (!map.getSource(layerId)) {
         map.addSource(layerId, {
           type: 'geojson',
-          data: { type: 'Feature', geometry: routes[c.id] },
+          data: {
+            type: 'Feature',
+            geometry: routes[c.id]
+          }
         });
+      }
 
-        map.addLayer({
-          id: layerId,
-          type: 'line',
-          source: layerId,
-          layout: { 'line-join': 'round', 'line-cap': 'round' },
-          paint: { 'line-color': c.color, 'line-width': 4 },
-        });
+      map.addLayer({
+        id: layerId,
+        type: 'line',
+        source: layerId,
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': c.color, 'line-width': 4 }
+      });
 
-        map.on('click', layerId, () =>
-          setActiveCorridor(prev => (prev === c.id ? null : c.id))
-        );
+      map.on('click', layerId, () => {
+        setActiveCorridor(prev => (prev === c.id ? null : c.id));
       });
     });
-  }, [routes]);
+  };
 
-  const filteredSites = showAllSites
-    ? siteData
-    : activeCorridor
-    ? siteData.filter(site =>
-        (!searchQuery.trim() ||
-          Object.values(site).some(
-            v => typeof v === 'string' && v.toLowerCase().includes(searchQuery.toLowerCase())
-          )) && site.id.startsWith(activeCorridor)
+  if (map.isStyleLoaded()) {
+    handleStyleLoad();
+  } else {
+    map.once('styledata', handleStyleLoad);
+  }
+}, [routes, loadingRoutes]);
+
+
+  const filteredSites = (showAllSites ? siteData : siteData.filter(site => site.id.startsWith(activeCorridor)))
+    .filter(site =>
+      !searchQuery.trim() ||
+      Object.values(site).some(
+        v => typeof v === 'string' && v.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : [];
+    );
 
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
+
     markerRefs.forEach(m => m.remove());
     const newMarkers = [];
     const bounds = new mapboxgl.LngLatBounds();
+
+    if (!activeCorridor && !showAllSites) return;
 
     filteredSites.forEach(site => {
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
