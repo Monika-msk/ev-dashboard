@@ -1061,7 +1061,10 @@ export default function App() {
     const fetched = {};
 
     for (const c of corridorDefs) {
-      const coordStr = `${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}`;
+      const coordStr = c.via
+  ? `${c.src[0]},${c.src[1]};${c.via[0]},${c.via[1]};${c.dst[0]},${c.dst[1]}`
+  : `${c.src[0]},${c.src[1]};${c.dst[0]},${c.dst[1]}`;
+
       const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
       try {
         const res = await fetch(url);
