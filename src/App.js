@@ -1084,17 +1084,22 @@ export default function App() {
 
 
 
- useEffect(() => {
+ // ✅ Final corridor route rendering + automatic zoom to fit all routes
+
+useEffect(() => {
   const map = mapRef.current;
   if (!map || loadingRoutes) return;
 
   const handleStyleLoad = () => {
     corridorDefs.forEach(c => {
       const layerId = `route-${c.id}`;
+      const sourceId = `source-${c.id}`;
+
       if (!routes[c.id] || map.getLayer(layerId)) return;
 
-      if (!map.getSource(layerId)) {
-        map.addSource(layerId, {
+      // ✅ Add GeoJSON source for each corridor
+      if (!map.getSource(sourceId)) {
+        map.addSource(sourceId, {
           type: 'geojson',
           data: {
             type: 'Feature',
@@ -1103,18 +1108,27 @@ export default function App() {
         });
       }
 
+      // ✅ Add line layer for the corridor
       map.addLayer({
         id: layerId,
         type: 'line',
-        source: layerId,
+        source: sourceId,
         layout: { 'line-join': 'round', 'line-cap': 'round' },
-        paint: { 'line-color': c.color, 'line-width': 4 }
-      });
-
-      map.on('click', layerId, () => {
-        setActiveCorridor(prev => (prev === c.id ? null : c.id));
+        paint: {
+          'line-color': c.color,
+          'line-width': 4
+        }
       });
     });
+
+    // ✅ Zoom to fit all route coordinates
+    const bounds = new mapboxgl.LngLatBounds();
+    Object.values(routes).forEach(route => {
+      route.coordinates.forEach(coord => bounds.extend(coord));
+    });
+    if (!bounds.isEmpty()) {
+      map.fitBounds(bounds, { padding: 100 });
+    }
   };
 
   if (map.isStyleLoaded()) {
