@@ -6,9 +6,8 @@ html, body, #root {
   box-sizing: border-box;
 }
 
-/* Optional – only needed if you use this class */
 .map-container {
-  height: 90vh;
+  height: 100%;
   width: 100%;
 }
 
