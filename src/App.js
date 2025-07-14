@@ -1,139 +1,139 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { corridorDefs, siteData } from "./Data";
 import Sidebar from "./Sidebar";
+import { corridorDefs, siteData } from "./Data";
 import "./App.css";
 
-mapboxgl.accessToken = "pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ"; // ◀— replace with your own if needed
+mapboxgl.accessToken = "pk.eyJ1IjoibW9uaWthbXNrIiwiYSI6ImNtY25ueDFmZjAxYjYycXM4YXI4Z2J0YmUifQ.IPGbA1CNqTHn1SJZm4pRPQ";
 
-export default function App() {
+const App = () => {
   const mapRef = useRef(null);
-  const mapContainer = useRef(null);
   const [selectedCorridor, setSelectedCorridor] = useState(null);
+  const siteMarkersRef = useRef([]);
+  const routeCache = useRef({});
+  const [mapStyle, setMapStyle] = useState("mapbox://styles/mapbox/streets-v11");
+  const [theme, setTheme] = useState("light");
 
-  // Build GeoJSON sources *once* for performance
-  const corridorFeatures = useMemo(
-    () =>
-      corridorDefs.map((c) => ({
-        type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: c.via ? [c.src, c.via, c.dst] : [c.src, c.dst]
-        },
-        properties: { id: c.id, color: c.color }
-      })),
-    []
-  );
+  const resetMapView = () => {
+    if (mapRef.current) {
+      mapRef.current.flyTo({ center: [78.9629, 22.5937], zoom: 4.3 });
+    }
+  };
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const toggleMapStyle = () => {
+    setMapStyle((prev) =>
+      prev.includes("streets-v11") ? "mapbox://styles/mapbox/satellite-v9" : "mapbox://styles/mapbox/streets-v11"
+    );
+  };
 
   useEffect(() => {
-    if (mapRef.current) return; // prevent re‑init on re‑render
-    mapRef.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      center: [78.9629, 22.5937], // Centre of India
-      zoom: 4
+    const map = new mapboxgl.Map({
+      container: "map",
+      style: mapStyle,
+      center: [78.9629, 22.5937],
+      zoom: 4.3,
     });
 
-    // Add all corridor lines
-    mapRef.current.on("load", () => {
-      mapRef.current.addSource("corridors", {
-        type: "geojson",
-        data: { type: "FeatureCollection", features: corridorFeatures }
-      });
+    mapRef.current = map;
 
-      // Display every corridor in its own colour
-      mapRef.current.addLayer({
-        id: "corridor-lines",
-        type: "line",
-        source: "corridors",
-        paint: {
-          "line-width": 4,
-          "line-color": ["get", "color"],
-          "line-opacity": 0.8
-        }
-      });
+    map.on("load", async () => {
+      for (const corridor of corridorDefs) {
+        const coords = [corridor.src];
+        if (corridor.via) coords.push(corridor.via);
+        coords.push(corridor.dst);
+        const coordStr = coords.map((c) => c.join(",")).join(";");
+        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+        const geometry = data.routes[0].geometry;
+
+        routeCache.current[corridor.id] = geometry;
+
+        map.addSource(`route-${corridor.id}`, {
+          type: "geojson",
+          data: { type: "Feature", geometry },
+        });
+
+        map.addLayer({
+          id: `route-${corridor.id}`,
+          type: "line",
+          source: `route-${corridor.id}`,
+          layout: { "line-join": "round", "line-cap": "round" },
+          paint: { "line-color": corridor.color, "line-width": 4 },
+        });
+      }
     });
-  }, [corridorFeatures]);
+  }, [mapStyle]);
 
-  // === Handle corridor selection ===
-  useEffect(() => {
-    if (!mapRef.current) return;
+  const handleCorridorSelect = async (corridorId) => {
+    setSelectedCorridor(corridorId);
+    const corridor = corridorDefs.find((c) => c.id === corridorId);
+    const map = mapRef.current;
 
-    // Remove previous site markers
-    if (mapRef.current && mapRef.current.getCanvas) {
-  mapRef.current.getCanvas().style.cursor = "";
-}
-
-    if (mapRef.current && mapRef.current.queryRenderedFeatures) {
-  mapRef.current.queryRenderedFeatures({ layers: ["site-markers"] });
-}
-
-
-    // Remove old site layer if it exists
-    if (mapRef.current.getLayer("site-markers")) {
-      mapRef.current.removeLayer("site-markers");
-    }
-    if (mapRef.current.getSource("sites")) {
-      mapRef.current.removeSource("sites");
-    }
-
-    if (!selectedCorridor) return;
-
-    // 1. Zoom & fly to the selected line
-    const c = selectedCorridor;
-    const coordinates = c.via ? [c.src, c.via, c.dst] : [c.src, c.dst];
-    const bounds = coordinates.reduce(
+    const geometry = routeCache.current[corridorId];
+    const bounds = geometry.coordinates.reduce(
       (b, coord) => b.extend(coord),
-      new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
+      new mapboxgl.LngLatBounds(geometry.coordinates[0], geometry.coordinates[0])
     );
-    mapRef.current.fitBounds(bounds, { padding: 80, duration: 900 });
+    map.fitBounds(bounds, { padding: 60 });
 
-    // 2. Add site markers for this corridor
-    const sitesForCorridor = siteData.filter(
-      (s) => s.corridor.replace(/\s+/g, "") === c.name.replace(/\s+/g, "")
+    siteMarkersRef.current.forEach((m) => m.remove());
+    siteMarkersRef.current = [];
+
+    const corridorSites = siteData.filter(
+      (site) => site.corridor.replace(/\s/g, "") === corridor.name.replace(/\s/g, "")
     );
 
-    mapRef.current.addSource("sites", {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: sitesForCorridor.map((s) => ({
-          type: "Feature",
-          geometry: { type: "Point", coordinates: s.coordinates },
-          properties: { id: s.id, label: `${s.id} – ${s.amenities}` }
-        }))
-      }
-    });
+    corridorSites.forEach((site) => {
+      const el = document.createElement("div");
+      el.className = "custom-marker";
 
-    mapRef.current.addLayer({
-      id: "site-markers",
-      type: "circle",
-      source: "sites",
-      paint: {
-        "circle-radius": 6,
-        "circle-color": "#222",
-        "circle-stroke-width": 2,
-        "circle-stroke-color": "white"
-      }
-    });
+      const popupHTML = `
+        <strong>Site ID:</strong> ${site.id}<br>
+        <strong>Amenities:</strong> ${site.amenities}<br>
+        <strong>Highway:</strong> ${site.highway}<br>
+        <strong>Distance from Highway:</strong> ${site.distanceFromHighway}<br>
+        <strong>Site Size:</strong> ${site.siteSize}<br>
+        <strong>Substation:</strong> ${site.substation}<br>
+        <strong>Renewables:</strong> ${site.renewables}<br>
+        <strong>Contact:</strong> ${site.contact}
+      `;
 
-    // Optional: popup on click
-    mapRef.current.on("click", "site-markers", (e) => {
-      const { coordinates } = e.features[0].geometry;
-      const { label } = e.features[0].properties;
-      new mapboxgl.Popup().setLngLat(coordinates).setText(label).addTo(mapRef.current);
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat(site.coordinates)
+        .setPopup(new mapboxgl.Popup().setHTML(popupHTML))
+        .addTo(map);
+
+      siteMarkersRef.current.push(marker);
     });
-  }, [selectedCorridor]);
+  };
+
+  const zoomIn = () => mapRef.current && mapRef.current.zoomIn();
+  const zoomOut = () => mapRef.current && mapRef.current.zoomOut();
 
   return (
-    <div className="app">
+    <div className={`app-container ${theme}`}>
       <Sidebar
         corridors={corridorDefs}
-        activeId={selectedCorridor?.id}
-        onSelect={(c) => setSelectedCorridor(c)}
+        onSelect={handleCorridorSelect}
+        selectedCorridor={selectedCorridor}
       />
-      <div ref={mapContainer} className="map-container" />
+      <div id="map" style={{ width: "100vw", height: "100vh" }}></div>
+      <div className="map-controls">
+        <button onClick={zoomIn}>➕</button>
+        <button onClick={zoomOut}>➖</button>
+        <button onClick={resetMapView}>🔄</button>
+        <button onClick={toggleMapStyle}>🗺️</button>
+        <button onClick={toggleTheme}>🌓</button>
+      </div>
     </div>
   );
-}
+};
+
+export default App;

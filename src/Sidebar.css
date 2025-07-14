@@ -1,38 +1,50 @@
 .sidebar {
   position: fixed;
-  top: 0;
   left: 0;
-  height: 100%;
-  width: 300px;
-  background: #ffffff;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid #ccc;
+  padding: 20px;
   overflow-y: auto;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  font-family: "Segoe UI", sans-serif;
 }
-.sidebar__title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+
+.sidebar h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #222;
+  text-align: center;
 }
-.sidebar__list {
-  list-style: none;
+
+.corridor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.sidebar__btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 0.5rem 0.75rem;
-  border: 3px solid transparent;
-  border-left-width: 6px;
-  background: none;
+
+.corridor-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f9f9f9;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.corridor-card:hover {
+  background: #eaeaea;
+}
+
+.corridor-id {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.corridor-name {
+  color: #333;
   font-size: 0.95rem;
-  transition: background 0.2s;
-}
-.sidebar__btn:hover,
-.sidebar__btn.active {
-  background: rgba(0, 0, 0, 0.05);
-}
-.sidebar__btn.active {
-  font-weight: 600;
 }
