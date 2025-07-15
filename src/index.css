@@ -1,12 +1,57 @@
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-html,
-body,
+
 #root {
-  height: 100%;
-  width: 100%;
-  font-family: "Inter", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  right: 0;
+  bottom: 0;
+}
+
+@media (max-width: 768px) {
+  #map {
+    left: 0;
+    top: 70px;
+  }
+}
+
+.map-controls {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.map-controls button {
+  padding: 8px 14px;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.map-controls button:hover {
+  background: #f1f1f1;
+}
+
+.marker {
+  background-image: url("https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png");
+  background-size: contain;
+  width: 30px;
+  height: 40px;
+  cursor: pointer;
 }

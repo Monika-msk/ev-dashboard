@@ -20,7 +20,7 @@ export const corridorDefs = [
 { id: 'S', name: 'Hubballi – Chitradurga', src: [75.1240, 15.3647], dst: [76.4039, 14.2222], color: '#00B894' },
 { id: 'T', name: 'JNPT/Navi Mumbai – Pune', src: [73.0280, 18.9467], dst: [73.8567, 18.5204], color: '#636E72' },
 { id: 'U', name: 'Visakhapatnam – Brahmapur', src: [83.2185, 17.6868], dst: [84.7941, 19.3115], color: '#E84393' },
-{ id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], dst: [74.8723, 31.6340], color: '#FDCB6E' },
+{ id: 'V', name: 'Chandigarh – Ludhiana – Amritsar', src: [76.7794, 30.7333], via: [75.8573, 30.9000], dst: [74.8723, 31.6340],  color: '#FDCB6E' },
 { id: 'W', name: 'Chennai – Ongole', src: [80.2707, 13.0827], dst: [80.0483, 15.5036], color: '#A29BFE' },
 { id: 'X', name: 'Ambala – Jalandhar', src: [76.8343, 30.3782], dst: [75.5762, 31.3260], color: '#FF7675' }]; // Replace with your actual corridor data
 export const siteData = [
@@ -205,7 +205,7 @@ export const siteData = [
   },
   {
     id: 'E2',
-    coordinates: [76.6854, 10.6211],
+    coordinates: [76.6906, 10.6256],
     corridor: 'Coimbatore – Kochi',
     highway: 'NH 544',
     distanceFromHighway: '2.4 km',
@@ -217,7 +217,7 @@ export const siteData = [
   },
   {
     id: 'E3',
-    coordinates: [76.3578, 10.0167],
+    coordinates: [76.3589, 10.0161],
     corridor: 'Coimbatore – Kochi',
     highway: 'NH 544',
     distanceFromHighway: '2.5 km',
@@ -277,7 +277,7 @@ export const siteData = [
   },
   {
     id: 'F3',
-    coordinates: [78.1510, 11.6643],
+    coordinates: [78.1494, 11.6639],
     corridor: 'Coimbatore – Salem',
     highway: 'NH 544',
     distanceFromHighway: '2.6 km',
@@ -289,7 +289,7 @@ export const siteData = [
   },
   {
   id: 'G1',
-  coordinates: [88.2645, 22.5293],
+  coordinates: [88.2628, 22.5270],
   corridor: 'Kolkata – Haldia',
   highway: 'NH 41',
   distanceFromHighway: '2.3 km',
@@ -364,7 +364,7 @@ export const siteData = [
   },
  {
   id: 'H4',
-  coordinates: [76.7861, 30.7086],
+  coordinates: [76.7861, 30.7044],
   corridor: 'Delhi – Chandigarh',
   highway: 'NH 44',
   distanceFromHighway: '2.4 km',
@@ -448,7 +448,7 @@ export const siteData = [
   },
   {
     id: 'J1',
-    coordinates: [73.8567, 18.5204],
+    coordinates: [73.8575, 18.5258],
     corridor: 'Pune – Nashik',
     highway: 'NH 60',
     distanceFromHighway: '2.5 km',
@@ -484,7 +484,7 @@ export const siteData = [
   },
   {
     id: 'J4',
-    coordinates: [73.7898, 19.9975],
+    coordinates: [73.7894, 19.9964],
     corridor: 'Pune – Nashik',
     highway: 'NH 60',
     distanceFromHighway: '2.8 km',

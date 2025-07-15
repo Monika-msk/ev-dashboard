@@ -1,50 +1,67 @@
+/* Sidebar.css */
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 280px;
-  background-color: #ffffff;
-  border-right: 1px solid #ccc;
-  padding: 20px;
+  width: 260px;
+  background-color: #f7f7f7;
+  padding: 10px 15px;
   overflow-y: auto;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  border-right: 1px solid #ddd;
+  position: fixed; /* fixed so it scrolls independently */
+  top: 0;
+  left: 0;
   z-index: 2;
-  font-family: "Segoe UI", sans-serif;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-bottom: 100px;
+  box-sizing: border-box;
 }
 
 .sidebar h2 {
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  color: #222;
-  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.corridor-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.corridor-card {
-  border: 1px solid #ddd;
+.corridor-box {
+  background-color: #fff;
+  margin-bottom: 8px;
   padding: 10px;
   border-radius: 6px;
-  background: #f9f9f9;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  cursor: default;
 }
 
-.corridor-card:hover {
-  background: #eaeaea;
-}
-
-.corridor-id {
-  font-weight: bold;
+.corridor-box strong {
+  font-weight: 600;
   margin-right: 5px;
 }
 
-.corridor-name {
-  color: #333;
-  font-size: 0.95rem;
+/* Ensure map takes full height but is not scrollable */
+.map-container {
+  position: fixed;
+  top: 0;
+  left: 260px; /* width of sidebar */
+  right: 0;
+  bottom: 0;
+  overflow: hidden; /* disable map scroll */
+}
+
+/* Optional: ensure buttons don't scroll */
+.map-buttons {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-buttons button {
+  padding: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
 }

@@ -1,0 +1,41 @@
+.db-container {
+  padding: 32px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.db-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  padding: 8px 14px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.db-table th {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+}
+
+.db-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.db-table tr:hover {
+  background: #f9f9f9;
+}
