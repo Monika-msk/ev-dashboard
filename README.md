@@ -1,70 +1,101 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# EV Corridor Dashboard
 
-## Available Scripts
+An interactive web dashboard built with React and Mapbox GL JS for visualizing Electric Vehicle corridor sites across India. This powerful tool enables exploration, analysis, and export of site and corridor data with an intuitive interface optimized for efficiency and user experience.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **High-performance interactive map:** Powered by Mapbox GL JS to render detailed EV corridors and site markers with smooth zoom and pan.
+- **Corridor & Site Visualization:** Clear route rendering and site pinpointing with custom markers and informative popups.
+- **Dynamic Search & Filtering:** Search by corridor ID, name, or site attributes for quick data access.
+- **Sidebar Navigation:** Intuitive sidebar for corridor selection and easy navigation of site clusters.
+- **Exportable Data:** Export site data effortlessly to Excel (.xlsx) for offline analysis and reporting.
+- **Full Data Table:** View complete site information in a searchable and filterable table overlay.
+- **Responsive Design:** Optimized layout adapts across screen sizes for desktop and tablet use.
+- **Map Style Toggle:** Switch between street and satellite views to suit user preference.
+- **Performance Optimizations:** Handles route fetching and rendering efficiently with batch loading and caching strategies.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Live Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Experience the fully functional dashboard deployed on GitHub Pages:  
+[https://monika-msk.github.io/ev-dashboard/](https://monika-msk.github.io/ev-dashboard/)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node.js and npm installed on your machine
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone the repository:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```
+   git clone https://github.com/Monika-msk/ev-dashboard.git
+   cd ev-dashboard
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install dependencies:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```
+   npm install
+   ```
 
-## Learn More
+3. Start the development server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```
+   npm start
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Access the app at [http://localhost:3000](http://localhost:3000).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Deployment
 
-### Analyzing the Bundle Size
+To build and deploy to GitHub Pages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+npm run build
+npm run deploy
+```
 
-### Making a Progressive Web App
+Your updated site will be published automatically at the GitHub Pages URL.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Technical Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **React:** Functional components with hooks for state management and lifecycle.
+- **Mapbox GL JS:** Advanced vector map rendering with route and marker layers.
+- **Data Layer:** Dynamic loading of corridor and site data with API-driven routing geometry.
+- **UX Enhancements:** Popup tooltips, search inputs, and responsive controls for seamless interaction.
+- **Data Export:** Excel export via XLSX JS library for convenient reporting.
+- **Code Structure:** Modular and maintainable architecture for extensibility.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Project Structure
 
-### `npm run build` fails to minify
+- `/src`: Source code for components, styles, and data
+- `/public`: Static assets and HTML template
+- `/build`: Production optimized build folder
+- `.gitignore`: Lists untracked/ignored files including dependencies and build files
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+
+
+
+## Author
+
+Monika S Kumar
+
+
+
